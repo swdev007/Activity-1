@@ -1,0 +1,16 @@
+// const baseurl = 'http://192.168.0.71:8666/api/';
+const baseurl = 'https://eklipse.shinedezign.pro/api/';
+
+export const login = baseurl + 'login'; //body => username, password
+export const logout = baseurl + 'logout'; //body=>AccessToken
+export const GetCollectionList = baseurl + 'GetCollectionList'; // body=> AccessToken
+export const GetCollectionDetails = baseurl + 'GetCollectionDetails'; //body=> collectionId
+export const updateCollection = baseurl + 'updateCollection'; // body => collectionId, description, location, status
+export const GetBinList = baseurl + 'GetBinList'; //body=> collectionId
+export const GetBinDetails = baseurl + 'GetBinDetails'; //body=> binId
+export const updateBin = baseurl + 'updateBin'; // body=> binId, description, location
+export const AddItem = baseurl + 'AddItem'; //body=> binId, name, image_url, description, location
+export const updateItem = baseurl + 'updateItem'; //body=> itemId, name, image_url, description, location
+export const DeleteItem = baseurl + 'DeleteItem'; //body=> itemId
+export const GetItemList = baseurl + 'GetItemList'; //body=> binId
+export const GetItemDetails = baseurl + 'GetItemDetails'; //body=> itemId
