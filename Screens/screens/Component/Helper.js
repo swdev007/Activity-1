@@ -509,6 +509,7 @@ export function HeaderComponent({
 }) {
   const navigation = useNavigation();
   const handleLogout = async () => {
+    AsyncStorage.clear();
     AsyncStorage.removeItem('LoginToken');
     navigation.navigate('LoginScreen');
     // let token = await AsyncStorage.getItem('LoginToken');

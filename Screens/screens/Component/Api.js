@@ -14,3 +14,5 @@ export const updateItem = baseurl + 'updateItem'; //body=> itemId, name, image_u
 export const DeleteItem = baseurl + 'DeleteItem'; //body=> itemId
 export const GetItemList = baseurl + 'GetItemList'; //body=> binId
 export const GetItemDetails = baseurl + 'GetItemDetails'; //body=> itemId
+export const TokenByCode = baseurl + 'GetTokenByCode'; // body=> code, uniqueCode
+export const RefreshToken = baseurl + 'RefreshToken'; // body=> refresh_token

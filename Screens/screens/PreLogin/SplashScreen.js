@@ -1,28 +1,24 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  SafeAreaView,
-} from 'react-native';
+import React from 'react';
+import {View, Text, Image, ImageBackground} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import customcss from '../assets/customcss';
 import {CommonBtn} from '../Component/Helper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {AuthService} from '../../services/auth.service';
+
+const authService = new AuthService();
 
 const SplashScreen = () => {
   const navigation = useNavigation();
   const handleLogin = async () => {
-    let token = await AsyncStorage.getItem('LoginToken');
-    console.log(token);
-    if (token) {
-      navigation.navigate('Homes');
-    } else {
+    const isTokenExpired = await authService.isTokenExpired();
+    if (isTokenExpired) {
       navigation.navigate('LoginScreen');
+    } else {
+      navigation.navigate('Homes');
     }
   };
+
   return (
     <View style={{flex: 1}}>
       <View style={{height: '50%'}}>

@@ -5,6 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MyStack from './Screens/Navigation/StackNavigation';
 import PreLoginStack from './Screens/Navigation/PreLoginStack';
 import SplashScreen from 'react-native-splash-screen';
+import {decode} from 'base-64';
+global.atob = decode;
 
 LogBox.ignoreAllLogs();
 
