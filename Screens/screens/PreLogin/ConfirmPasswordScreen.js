@@ -19,6 +19,7 @@ import {useTogglePasswordVisibility} from './useTogglePasswordVisibility';
 
 const ConfirmPasswordScreen = ({navigation, route}) => {
   const [code, setCode] = useState('');
+  const [codeError, setCodeError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -46,14 +47,23 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
 
   const handleResetPassword = async () => {
     if (password.length === 0) {
-      setPasswordError('Email is required');
-      return;
+      setPasswordError('Password is required');
     } else {
       setPasswordError('');
     }
 
+    if (code.length === 0) {
+      setCodeError('Code is required');
+      return;
+    } else {
+      setCodeError('');
+    }
+
+    if (code.length === 0 || password.length === 0) {
+      return;
+    }
+
     setLoading(true);
-    console.log(route.params.email);
     const response = await axios.post(login, {
       code: code,
       password: password,
@@ -99,31 +109,20 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
 
               <View style={{marginStart: 21, marginEnd: 21, marginTop: 15}}>
                 <View style={{marginTop: 20}}>
-                  <Text style={customcss.nametext}> Code on email </Text>
+                  <Text style={customcss.nametext}>Code</Text>
                   <TextInput
                     style={customcss.textinput}
-                    placeholder="Enter email"
+                    placeholder="Enter Code"
                     placeholderTextColor={'#727582'}
                     value={code}
                     onChangeText={text => setCode(text)}
                     maxLength={30}
                   />
-                  <Image
-                    source={require('../Component/Image/email.png')}
-                    style={{
-                      height: 14,
-                      width: 18,
-                      resizeMode: 'contain',
-                      position: 'absolute',
-                      right: 12,
-                      top: 40,
-                    }}
-                  />
                 </View>
 
-                {/* {code.length >= 0 && (
-                  <Text style={customcss.error}>{emailError}</Text>
-                )} */}
+                {codeError.length > 0 && (
+                  <Text style={customcss.error}>{codeError}</Text>
+                )}
 
                 <View style={{marginTop: 20}}>
                   <Text style={customcss.nametext}> Password </Text>

@@ -6,8 +6,10 @@ import {
   Pressable,
   Platform,
   Linking,
+  ActivityIndicator,
+  Dimensions,
 } from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import customcss from '../assets/customcss';
 import {CommonBtn1} from '../Component/Helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,12 +18,16 @@ import {Colors} from '../Component/Colors';
 import SafariView from 'react-native-safari-view';
 import {InAppBrowser} from 'react-native-inappbrowser-reborn';
 import {getUniqueId} from 'react-native-device-info';
-import {AuthService, LOGIN_URL} from '../../services/auth.service';
+import {AuthService, LOGOUT_URL} from '../../services/auth.service';
 import {STORAGE_TYPE} from '../../enums/storage.enums';
+import {useToast} from 'react-native-toast-notifications';
 
 const authService = new AuthService();
 
 const LoginScreen = ({navigation}) => {
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const eventHandler = event => {
       const code =
@@ -41,6 +47,7 @@ const LoginScreen = ({navigation}) => {
 
     const getTokenByCode = async code => {
       try {
+        setLoading(true);
         const uniqueId = await getUniqueId();
         const response = await authService.getTokenByCode(code, uniqueId);
         const {access_token, id_token, refresh_token} = response.data.data;
@@ -55,7 +62,12 @@ const LoginScreen = ({navigation}) => {
           await AsyncStorage.clear();
         }
       } catch (error) {
-        console.log(error.message);
+        toast.show(error.message, {
+          type: 'danger',
+          placement: 'top',
+        });
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -63,7 +75,7 @@ const LoginScreen = ({navigation}) => {
     return () => {
       listener.remove();
     };
-  }, [navigation]);
+  }, [navigation, toast]);
 
   const pressHandler = useCallback(url => {
     Platform.OS === 'ios'
@@ -84,6 +96,26 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate('ForgetPasswordScreen');
   };
 
+  if (loading) {
+    return (
+      <View
+        style={{
+          width: Dimensions.get('window').width,
+          height: Dimensions.get('window').height,
+          backgroundColor: 'trasnsparent',
+          borderRadius: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'center',
+        }}>
+        <ActivityIndicator
+          animating={true}
+          color={Colors.mainColor}
+          type="large"
+        />
+      </View>
+    );
+  }
   return (
     <View style={{flex: 1}}>
       <KeyboardAwareScrollView style={{backgroundColor: Colors.white}}>
@@ -105,15 +137,13 @@ const LoginScreen = ({navigation}) => {
               <View style={{marginStart: 21, marginEnd: 21, marginTop: 15}}>
                 <CommonBtn1
                   title={'Login'}
-                  onPress={() => pressHandler(LOGIN_URL)}
+                  onPress={() => pressHandler(LOGOUT_URL)}
                   color={'#fff'}
                 />
                 <Pressable
                   style={{alignItems: 'center', marginBottom: 40}}
                   onPress={goToForgetPassword}>
-                  <Text style={customcss.forgettext}>
-                    Forgot username or password?
-                  </Text>
+                  <Text style={customcss.forgettext}>Forgot password?</Text>
                 </Pressable>
               </View>
             </View>
