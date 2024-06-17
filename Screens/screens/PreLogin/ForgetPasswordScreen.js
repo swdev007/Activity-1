@@ -13,10 +13,14 @@ import customcss from '../assets/customcss';
 import {CommonBtn1} from '../Component/Helper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Colors} from '../Component/Colors';
+import {AuthService} from '../../services/auth.service';
+import {useToast} from 'react-native-toast-notifications';
 
+const authService = new AuthService();
 const ForgetPasswordScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const toast = useToast();
 
   const [loading, setLoading] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -42,38 +46,36 @@ const ForgetPasswordScreen = ({navigation}) => {
   }, [navigation]);
 
   const handleResetPassword = async () => {
-    var emailValid = false;
     if (email.length === 0) {
       setEmailError('Email is required');
+      return;
     } else {
       setEmailError('');
-      emailValid = true;
     }
-
-    if (emailValid) {
-      navigation.replace('ConfirmPasswordScreen', {email: email});
-      return;
+    try {
+      setLoading(true);
+      const res = await authService.forgotPassword(email);
+      if (res.data.error === true) {
+        toast.show(res.data.message, {
+          type: 'danger',
+          placement: 'top',
+        });
+        setLoading(false);
+      } else {
+        toast.show('OTP sent successfully', {
+          type: 'success',
+          placement: 'top',
+        });
+        setLoading(false);
+        navigation.replace('ConfirmPasswordScreen', {email: email});
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.show(error.message, {
+        type: 'danger',
+        placement: 'top',
+      });
     }
-    // TODO: NEED TO IMPLEMENT API
-    //   setLoading(true);
-
-    //   const response = await axios.post(login, {
-    //     username: email,
-    //   });
-
-    //   try {
-    //     if (response.data.error === false) {
-    //       setLoading(false);
-
-    //       navigation.replace('ConfirmPasswordScreen', {email: email});
-    //     } else {
-    //       setEmailError(response?.data?.message);
-    //       setLoading(false);
-    //     }
-    //   } catch (error) {
-    //     console.log(error.response);
-    //     setLoading(false);
-    //   }
   };
 
   return (

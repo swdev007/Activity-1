@@ -1,6 +1,11 @@
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
-import {RefreshToken, TokenByCode} from '../screens/Component/Api';
+import {
+  RefreshToken,
+  TokenByCode,
+  ForgotPassword,
+  ResetPassword,
+} from '../screens/Component/Api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {STORAGE_TYPE} from '../enums/storage.enums';
 
@@ -83,5 +88,19 @@ export class AuthService {
       console.error('Error decoding token:', error);
       return true;
     }
+  }
+
+  async forgotPassword(email) {
+    return axios.post(ForgotPassword, {
+      email,
+    });
+  }
+
+  async confirmPassword(code, password, email) {
+    return axios.post(ResetPassword, {
+      otp: code,
+      password: password,
+      email: email,
+    });
   }
 }

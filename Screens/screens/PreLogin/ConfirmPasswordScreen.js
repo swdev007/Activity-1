@@ -11,12 +11,13 @@ import {
 import React, {useEffect, useState} from 'react';
 import customcss from '../assets/customcss';
 import {CommonBtn1} from '../Component/Helper';
-import axios from 'axios';
-import {login} from '../Component/Api';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Colors} from '../Component/Colors';
 import {useTogglePasswordVisibility} from './useTogglePasswordVisibility';
+import {AuthService} from '../../services/auth.service';
+import {useToast} from 'react-native-toast-notifications';
 
+const authService = new AuthService();
 const ConfirmPasswordScreen = ({navigation, route}) => {
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState('');
@@ -24,6 +25,7 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const toast = useToast();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -54,7 +56,6 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
 
     if (code.length === 0) {
       setCodeError('Code is required');
-      return;
     } else {
       setCodeError('');
     }
@@ -64,21 +65,31 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
     }
 
     setLoading(true);
-    const response = await axios.post(login, {
-      code: code,
-      password: password,
-      email: route.params.email,
-    });
 
     try {
+      const response = await authService.confirmPassword(
+        code,
+        password,
+        route.params.email,
+      );
       if (response.data.error === false) {
+        toast.show(response.data.message, {
+          type: 'success',
+          placement: 'top',
+        });
         setLoading(false);
       } else {
-        setPasswordError(response?.data?.message);
+        toast.show(response.data.message, {
+          type: 'danger',
+          placement: 'top',
+        });
         setLoading(false);
       }
     } catch (error) {
-      console.log(error.response);
+      toast.show(error.message, {
+        type: 'danger',
+        placement: 'top',
+      });
       setLoading(false);
     }
   };

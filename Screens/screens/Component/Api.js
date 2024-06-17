@@ -16,3 +16,5 @@ export const GetItemList = baseurl + 'GetItemList'; //body=> binId
 export const GetItemDetails = baseurl + 'GetItemDetails'; //body=> itemId
 export const TokenByCode = baseurl + 'GetTokenByCode'; // body=> code, uniqueCode
 export const RefreshToken = baseurl + 'RefreshToken'; // body=> refresh_token
+export const ForgotPassword = baseurl + 'forgotPassword'; // body => email
+export const ResetPassword = baseurl + 'resetPassword'; // body=> email, password, otp
