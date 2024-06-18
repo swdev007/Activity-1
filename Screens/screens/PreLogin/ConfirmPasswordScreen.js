@@ -78,6 +78,7 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
           placement: 'top',
         });
         setLoading(false);
+        navigation.goBack();
       } else {
         toast.show(response.data.message, {
           type: 'danger',
