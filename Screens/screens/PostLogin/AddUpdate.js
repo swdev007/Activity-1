@@ -96,7 +96,7 @@ const AddUpdate = ({navigation, route}) => {
       <View>
         <HeaderComponent
           type={'Icon'}
-          collection={'Add/Update item'}
+          collection={'Add/Update evidence'}
           onPress={() => navigation.navigate('Home')}
         />
         <CustomHeaderNavigation data={screens} currentname={route.name} />
@@ -113,7 +113,7 @@ const AddUpdate = ({navigation, route}) => {
                 source={require('../Component/Image/collection.png')}
                 style={customcss.collectionimage}
               />
-              <Text style={customcss.collectiontext}>Collection:</Text>
+              <Text style={customcss.collectiontext}>Case:</Text>
             </View>
             <View
               style={{
@@ -165,14 +165,14 @@ const AddUpdate = ({navigation, route}) => {
           <View style={{marginBottom: 9}}>
             <CommonBtnForViewItem
               onPress={() =>
-                navigation.navigate('ViewCollectionList', {
+                navigation.navigate('ViewCaseList', {
                   id: route?.params?.id,
                 })
               }
             />
           </View>
           <CommonBtnWithIcon
-            title={'Take item Photo'}
+            title={'Take evidence Photo'}
             source={require('../Component/Image/profilemg.png')}
             style={{
               height: 35,
@@ -268,13 +268,13 @@ const AddUpdate = ({navigation, route}) => {
         </View>
         <View style={{flexDirection: 'row', marginTop: -10}}>
           <CommonSmallBtn1
-            title={'Save Item'}
+            title={'Save Evidence'}
             backgroundColor={'#fff'}
             color={'#232529'}
             onPress={sendMessage}
           />
           <CommonSmallBtn1
-            title={'Delete Item'}
+            title={'Delete Evidence'}
             backgroundColor={'#1F54FD'}
             color={'#fff'}
           />

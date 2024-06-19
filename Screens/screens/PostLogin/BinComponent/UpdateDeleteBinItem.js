@@ -209,7 +209,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
             if (response?.data?.error == false) {
               await Voice.destroy();
               Voice.removeAllListeners();
-              navigation.navigate('BinItemDetail', {id: route?.params?.id});
+              navigation.navigate('WarrantItemDetail', {id: route?.params?.id});
               setLoading(false);
             }
           })
@@ -222,7 +222,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
   };
 
   const handleDeleteItemFunc = () => {
-    Alert.alert('Delete Item', 'Are you sure, you want to delete the item', [
+    Alert.alert('Delete Evidence', 'Are you sure, you want to delete the evidence', [
       {
         text: 'Cancel',
         onPress: () => console.log('Cancel Pressed'),
@@ -258,7 +258,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
       <View>
         <HeaderComponent
           type={'Icon'}
-          collection={'Update item'}
+          collection={'Update evidence'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
@@ -419,7 +419,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
             <View>
               {imagepath ? (
                 <CommonBtnWithIcon
-                  title={'Take item Photo'}
+                  title={'Take evidence Photo'}
                   source={{uri: imagepath}}
                   style={customcss.commoniconbtnstyle}
                   width={screenWidth - 80}
@@ -427,7 +427,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
                 />
               ) : (
                 <CommonBtnWithIcon
-                  title={'Take item Photo'}
+                  title={'Take Evidence Photo'}
                   source={require('../../Component/Image/camera.png')}
                   style={customcss.commoniconbtnstyle}
                   width={screenWidth - 80}
@@ -445,7 +445,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
               justifyContent: 'space-between',
             }}>
             <CommonSmallBtn1
-              title={'Save Item'}
+              title={'Save Evidence'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
               onPress={() => UpdateBinItemFunc()}
@@ -453,7 +453,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
               loadercolor={'#fff'}
             />
             <CommonSmallBtn1
-              title={'Delete Item'}
+              title={'Delete Evidence'}
               backgroundColor={'#fff'}
               color={'#232529'}
               onPress={() => handleDeleteItemFunc()}

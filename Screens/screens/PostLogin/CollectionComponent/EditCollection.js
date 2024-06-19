@@ -157,7 +157,7 @@ const EditCollection = ({navigation, route}) => {
           if (response.data.error == false) {
             await Voice.destroy();
             Voice.removeAllListeners();
-            navigation.navigate('ViewCollection', {id: route?.params?.id});
+            navigation.navigate('ViewCase', {id: route?.params?.id});
             setLoading(false);
           } else if (response.data.error == true) {
             setDescriptionError(response?.data?.message?.description[0]);
@@ -177,7 +177,7 @@ const EditCollection = ({navigation, route}) => {
       <View>
         <HeaderComponent
           type={'Icon'}
-          collection={'Edit collection'}
+          collection={'Edit case'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
@@ -206,7 +206,7 @@ const EditCollection = ({navigation, route}) => {
                     source={require('../../Component/Image/collection.png')}
                     style={customcss.collectionimage}
                   />
-                  <Text style={customcss.collectiontext}> Collection: </Text>
+                  <Text style={customcss.collectiontext}> Case: </Text>
                 </View>
                 <View style={{marginLeft: 12, justifyContent: 'center'}}>
                   <Text style={customcss.collectionId}>
@@ -356,7 +356,7 @@ const EditCollection = ({navigation, route}) => {
               justifyContent: 'space-between',
             }}>
             <CommonSmallBtn1
-              title={'Save collection'}
+              title={'Save case'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
               onPress={() => SaveCollection()}

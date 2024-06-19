@@ -208,9 +208,9 @@ const AddNewItem = ({route, navigation}) => {
               await Voice.destroy();
               Voice.removeAllListeners();
 
-              navigation.navigate('GetItemListOfBin', {
+              navigation.navigate('GetEvidenceListOfWarrant', {
                 id: route?.params?.id,
-                screenName: 'AddItem',
+                screenName: 'AddEvidence',
               });
               setLoading(false);
             }
@@ -229,7 +229,7 @@ const AddNewItem = ({route, navigation}) => {
       <View>
         <HeaderComponent
           type={'Icon'}
-          collection={'Add item'}
+          collection={'Add evidence'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
@@ -388,7 +388,7 @@ const AddNewItem = ({route, navigation}) => {
             <View>
               {imagepath ? (
                 <CommonBtnWithIcon
-                  title={'Take item Photo'}
+                  title={'Take evidence Photo'}
                   source={{uri: imagepath}}
                   style={{
                     height: 20,
@@ -403,7 +403,7 @@ const AddNewItem = ({route, navigation}) => {
               ) : (
                 <View style={{alignItems: 'center', marginBottom: 10}}>
                   <CommonBtnWithIcon
-                    title={'Take item Photo'}
+                    title={'Take evidence Photo'}
                     source={require('../../Component/Image/camera.png')}
                     ImageError={'ImageError'}
                     style={{
@@ -425,7 +425,7 @@ const AddNewItem = ({route, navigation}) => {
           </View>
           <View>
             <CommonBtn
-              title={'create Item'}
+              title={'Create Evidence'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
               onPress={() => handleCreateItem()}

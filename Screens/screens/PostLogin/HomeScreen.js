@@ -73,7 +73,7 @@ const HomeScreen = ({navigation}) => {
           setLoading(false);
         })
         .catch(function (error) {
-          console.log('error of get Collection list =>', error);
+          console.log('error of get Case list =>', error);
           setLoading(false);
         });
     } else {
@@ -95,7 +95,7 @@ const HomeScreen = ({navigation}) => {
           borderColor: '#E5E8F5',
         }}
         onPress={() =>
-          navigation.navigate('ViewCollection', {id: item?.collection_id})
+          navigation.navigate('ViewCase', {id: item?.collection_id})
         }>
         <View
           style={{
@@ -176,7 +176,7 @@ const HomeScreen = ({navigation}) => {
       <HeaderComponent
         type={'Text'}
         name={useremail}
-        collection={'collection list'}
+        collection={'case list'}
       />
       <View style={customcss.collectionlistui}>
         <Text
@@ -187,7 +187,7 @@ const HomeScreen = ({navigation}) => {
             color: '#141F42',
             marginBottom: 13,
           }}>
-          Collection List
+          Case List
         </Text>
         <FlatList
           bounces={false}

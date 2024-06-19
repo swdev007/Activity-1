@@ -99,7 +99,7 @@ const ViewCollectionList = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <HeaderComponent
         type={'Icon'}
-        collection={'View Collection'}
+        collection={'View Case'}
         onPress={() => navigation.navigate('Home')}
         backbtn={'backbtn'}
         onHandleBack={() => navigation.goBack()}
@@ -124,7 +124,7 @@ const ViewCollectionList = ({navigation, route}) => {
         </View> */}
         <View style={{marginTop: 20, marginBottom: 20}}>
           <CommonBtnWithIcon
-            title={'Edit Collection'}
+            title={'Edit Case'}
             source={require('../../Component/Image/edit.png')}
             style={{
               height: 15,
@@ -141,7 +141,7 @@ const ViewCollectionList = ({navigation, route}) => {
             }
           />
           <CommonBtnWithIcon
-            title={'View Bin'}
+            title={'View Warrant'}
             source={require('../../Component/Image/eye.png')}
             style={{
               height: 15,
@@ -151,7 +151,7 @@ const ViewCollectionList = ({navigation, route}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('BinList', {id: route?.params?.id})
+              navigation.navigate('WarrantList', {id: route?.params?.id})
             }
           />
         </View>

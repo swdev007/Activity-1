@@ -276,7 +276,7 @@ export function CommonBtnForViewItem({onPress}) {
         marginStart: 17,
         marginEnd: 17,
       }}>
-      <AppText style={[styles.btntxt, {color: '#0F48FF'}]}>View item</AppText>
+      <AppText style={[styles.btntxt, {color: '#0F48FF'}]}>View evidence</AppText>
     </TouchableComponent>
   );
 }
@@ -329,9 +329,9 @@ export function CollectionDetail({
             style={customcss.collectionimage}
           />
           {binId ? (
-            <Text style={customcss.collectiontext}>ItemId:</Text>
+            <Text style={customcss.collectiontext}>EvidenceId:</Text>
           ) : (
-            <Text style={customcss.collectiontext}>Collection:</Text>
+            <Text style={customcss.collectiontext}>Case:</Text>
           )}
         </View>
         <View

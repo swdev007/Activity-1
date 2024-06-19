@@ -47,7 +47,7 @@ const BinItemDetail = ({navigation, route}) => {
           setLoading(false);
         } else {
           console.log(response.data);
-          console.log('responsedata at get Bin detail', response?.data);
+          console.log('responsedata at get Warrant detail', response?.data);
           setLoading(false);
         }
       })
@@ -58,7 +58,7 @@ const BinItemDetail = ({navigation, route}) => {
   };
 
   const HandleNavigation = () => {
-    if (prevRoute.name === 'BinDetails') {
+    if (prevRoute.name === 'WarrantDetails') {
       navigation.pop(3);
     } else {
       navigation.pop(2);
@@ -72,7 +72,7 @@ const BinItemDetail = ({navigation, route}) => {
       <View>
         <HeaderComponent
           type={'Icon'}
-          collection={'Item detail'}
+          collection={'Evidence detail'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
@@ -91,7 +91,7 @@ const BinItemDetail = ({navigation, route}) => {
         />
         <View style={{marginTop: 15}}>
           <CommonBtnWithIcon
-            title={'Edit Item'}
+            title={'Edit Evidence'}
             source={require('../../Component/Image/edit.png')}
             style={{
               height: 15,
@@ -101,14 +101,14 @@ const BinItemDetail = ({navigation, route}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('UpdateDeleteBinItem', {
+              navigation.navigate('UpdateDeleteWarrantItem', {
                 id: route?.params?.id,
                 sendData: bindetails,
               })
             }
           />
           <CommonBtnWithIcon
-            title={'Back to Bin'}
+            title={'Back to Warrant'}
             source={require('../../Component/Image/eye.png')}
             style={{
               height: 15,
@@ -120,7 +120,7 @@ const BinItemDetail = ({navigation, route}) => {
             onPress={() => HandleNavigation()}
           />
           {/* <CommonBtnWithIcon
-            title={'Lock Bin'}
+            title={'Lock Warrant'}
             source={require('../../Component/Image/lock.png')}
             style={{
               height: 15,
@@ -131,7 +131,7 @@ const BinItemDetail = ({navigation, route}) => {
             width={screenWidth - 40}
           /> */}
           {/* <CommonBtnWithIcon
-            title={'Add Item'}
+            title={'Add Evidence'}
             source={require('../../Component/Image/print.png')}
             style={{
               height: 15,
@@ -141,11 +141,11 @@ const BinItemDetail = ({navigation, route}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('AddNewItem', {id: route?.params?.id})
+              navigation.navigate('AddNewEvidence', {id: route?.params?.id})
             }
           /> */}
           {/* <CommonBtnWithIcon
-            title={'Print Bin Report'}
+            title={'Print Warrant Report'}
             source={require('../../Component/Image/print.png')}
             style={{
               height: 15,

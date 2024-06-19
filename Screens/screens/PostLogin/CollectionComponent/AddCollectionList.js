@@ -184,7 +184,7 @@ const AddCollectionList = ({route, navigation}) => {
   //           .post(AddItem, formdata)
   //           .then(function (response) {
   //             if (response?.data?.error == false) {
-  //               navigation.navigate('GetItemListOfBin', {
+  //               navigation.navigate('GetItemListOfWarrant', {
   //                 id: route?.params?.id,
   //                 screenName: 'AddItem',
   //               });
@@ -364,7 +364,7 @@ const AddCollectionList = ({route, navigation}) => {
             <View>
               {imagepath ? (
                 <CommonBtnWithIcon
-                  title={'Take item Photo'}
+                  title={'Take Evidence Photo'}
                   source={{uri: imagepath}}
                   style={{
                     height: 20,
@@ -379,7 +379,7 @@ const AddCollectionList = ({route, navigation}) => {
               ) : (
                 <View style={{alignItems: 'center', marginBottom: 10}}>
                   <CommonBtnWithIcon
-                    title={'Take item Photo'}
+                    title={'Take Evidence Photo'}
                     source={require('../../Component/Image/camera.png')}
                     ImageError={'ImageError'}
                     style={{
@@ -402,7 +402,7 @@ const AddCollectionList = ({route, navigation}) => {
 
           <View>
             <CommonBtn
-              title={'create Item'}
+              title={'create evidence'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
               //   onPress={() => handleCreateItem()}

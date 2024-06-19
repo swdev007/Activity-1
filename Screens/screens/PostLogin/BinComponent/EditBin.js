@@ -137,7 +137,7 @@ const EditBin = ({navigation, route}) => {
           if (response.data.error == false) {
             await Voice.destroy();
             Voice.removeAllListeners();
-            navigation.navigate('BinDetails', {id: route?.params?.id});
+            navigation.navigate('WarrantDetails', {id: route?.params?.id});
             setLoading(false);
           } else if (response.data.error == true) {
             setDescriptionError(response?.data?.message?.description[0]);
@@ -157,7 +157,7 @@ const EditBin = ({navigation, route}) => {
       <View>
         <HeaderComponent
           type={'Icon'}
-          collection={'Edit Bin'}
+          collection={'Edit Warrant'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
@@ -186,7 +186,7 @@ const EditBin = ({navigation, route}) => {
                     source={require('../../Component/Image/collection.png')}
                     style={customcss.collectionimage}
                   />
-                  <Text style={customcss.collectiontext}> Bin: </Text>
+                  <Text style={customcss.collectiontext}> Warrant: </Text>
                 </View>
                 <View style={{marginLeft: 12, justifyContent: 'center'}}>
                   <Text style={customcss.collectionId}>
@@ -333,7 +333,7 @@ const EditBin = ({navigation, route}) => {
               justifyContent: 'space-between',
             }}>
             <CommonSmallBtn1
-              title={'Save Bin'}
+              title={'Save Warrant'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
               onPress={() => UpdateBin()}

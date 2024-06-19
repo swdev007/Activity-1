@@ -60,7 +60,7 @@ const BinList = ({route, navigation}) => {
           borderColor: '#E5E8F5',
         }}
         onPress={() =>
-          navigation.navigate('BinDetails', {
+          navigation.navigate('WarrantDetails', {
             id: item?.warrant_id,
             screenPath: item?.bin_name,
           })
@@ -142,7 +142,7 @@ const BinList = ({route, navigation}) => {
       <View>
         <HeaderComponent
           type={'Home'}
-          collection={'Bin List'}
+          collection={'Warrant List'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
@@ -159,7 +159,7 @@ const BinList = ({route, navigation}) => {
             color: '#141F42',
             marginBottom: 13,
           }}>
-          Bin List
+          Warrant List
         </Text>
         <FlatList
           showsVerticalScrollIndicator={false}
