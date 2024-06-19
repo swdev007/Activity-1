@@ -300,11 +300,19 @@ export function CollectionDetail({
     }
   }, [isFocused]);
 
-  const GetCollectionDetailsFuc = () => {
+  const GetCollectionDetailsFuc = async () => {
+    let token = await AsyncStorage.getItem('LoginToken');
+    // add token
     axios
-      .post(GetCollectionDetails, {
-        collectionId: id,
-      })
+      .post(
+        GetCollectionDetails,
+        {
+          collectionId: id,
+        },
+        {
+          headers: {Authorization: token},
+        },
+      )
       .then(function (response) {
         setCollectionDetail(response.data.data);
       })
@@ -334,7 +342,9 @@ export function CollectionDetail({
           {binId ? (
             <Text style={customcss.collectionId}>#{binId}</Text>
           ) : (
-            <Text style={customcss.collectionId}>#{collectiondetail?.id}</Text>
+            <Text style={customcss.collectionId}>
+              #{collectiondetail?.collection_id}
+            </Text>
           )}
         </View>
       </View>

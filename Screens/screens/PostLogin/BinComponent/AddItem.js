@@ -150,7 +150,7 @@ const AddNewItem = ({route, navigation}) => {
     }
   };
 
-  const handleCreateItem = () => {
+  const handleCreateItem = async () => {
     // var nameValid = false;
     const pattern = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
     // if (nametext.length == 0) {
@@ -198,9 +198,11 @@ const AddNewItem = ({route, navigation}) => {
         formdata.append('name', null);
         formdata.append('description', descriptiontext);
         formdata.append('location', locationtext);
+        let token = await AsyncStorage.getItem('LoginToken');
         formdata.append('AccessToken', token);
+        console.log(AddItem, token);
         axios
-          .post(AddItem, formdata)
+          .post(AddItem, formdata, {headers: {Authorization: token}})
           .then(async function (response) {
             if (response?.data?.error == false) {
               await Voice.destroy();

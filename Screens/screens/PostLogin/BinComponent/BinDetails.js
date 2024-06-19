@@ -13,6 +13,7 @@ import axios from 'axios';
 import customcss from '../../assets/customcss';
 import BottomTab from '../../../Navigation/BottomTab';
 import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BinDetails = ({route, navigation}) => {
   // console.log(route);
@@ -27,13 +28,20 @@ const BinDetails = ({route, navigation}) => {
       GetBinDetailsFunc();
     }
   }, [isfocused]);
-  const GetBinDetailsFunc = () => {
+
+  const GetBinDetailsFunc = async () => {
+    let token = await AsyncStorage.getItem('LoginToken');
     setLoading(true);
     axios
-      .post(GetBinDetails, {
-        binId: route?.params?.id,
-      })
+      .post(
+        GetBinDetails,
+        {
+          binId: route?.params?.id,
+        },
+        {headers: {Authorization: token}},
+      )
       .then(function (response) {
+        console.log(response.data.data);
         setBinDetails(response.data.data);
         setLoading(false);
       })
@@ -59,7 +67,7 @@ const BinDetails = ({route, navigation}) => {
       </View>
       <ScrollView style={customcss.viewcollectionmain}>
         <CollectionDetail
-          binId={bindetails?.id}
+          binId={bindetails?.warrant_id}
           binlocation={bindetails?.location}
           bindescription={bindetails?.description}
         />

@@ -103,4 +103,12 @@ export class AuthService {
       email: email,
     });
   }
+
+  checkIfItIsAValidPassword(password) {
+    return password.match(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\\/]).{8,14}$/,
+    )
+      ? true
+      : false;
+  }
 }

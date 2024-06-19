@@ -11,6 +11,7 @@ import {
 } from '../../Component/Helper';
 import customcss from '../../assets/customcss';
 import BottomTab from '../../../Navigation/BottomTab';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BinList = ({route, navigation}) => {
   const [collectiondata, setCollectionData] = useState();
@@ -24,13 +25,19 @@ const BinList = ({route, navigation}) => {
       GetCollectionListFunc();
     }
   }, [isFocused]);
-  const GetCollectionListFunc = () => {
+  const GetCollectionListFunc = async () => {
     setLoading(true);
+    let token = await AsyncStorage.getItem('LoginToken');
     axios
-      .post(GetBinList, {
-        collectionId: route?.params?.id,
-      })
+      .post(
+        GetBinList,
+        {
+          collectionId: route?.params?.id,
+        },
+        {headers: {Authorization: token}},
+      )
       .then(function (response) {
+        console.log(response.data.data);
         setCollectionData(response?.data?.data);
         setLoading(false);
       })
@@ -54,7 +61,7 @@ const BinList = ({route, navigation}) => {
         }}
         onPress={() =>
           navigation.navigate('BinDetails', {
-            id: item?.id,
+            id: item?.warrant_id,
             screenPath: item?.bin_name,
           })
         }>
@@ -158,7 +165,7 @@ const BinList = ({route, navigation}) => {
           showsVerticalScrollIndicator={false}
           data={collectiondata}
           renderItem={(item, index) => RenderCollectionData(item, index)}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item.id}
           contentContainerStyle={{
             flexGrow: 1,
             paddingBottom: 5,

@@ -13,6 +13,7 @@ import {GetCollectionDetails} from '../../Component/Api';
 import axios from 'axios';
 import BottomTab from '../../../Navigation/BottomTab';
 import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ViewCollection = ({navigation, route}) => {
   const [collectiondetail, setCollectionDetail] = useState();
@@ -27,12 +28,18 @@ const ViewCollection = ({navigation, route}) => {
     }
   }, [isFocused]);
 
-  const GetCollectionDetailsFuc = () => {
+  const GetCollectionDetailsFuc = async () => {
     setLoading(true);
+    let token = await AsyncStorage.getItem('LoginToken');
+
     axios
-      .post(GetCollectionDetails, {
-        collectionId: route?.params?.id,
-      })
+      .post(
+        GetCollectionDetails,
+        {
+          collectionId: route?.params?.id,
+        },
+        {headers: {Authorization: token}},
+      )
       .then(function (response) {
         setCollectionDetail(response.data.data);
         setLoading(false);

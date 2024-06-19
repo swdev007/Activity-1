@@ -20,6 +20,8 @@ import BottomTab from '../../../Navigation/BottomTab';
 import {updateBin} from '../../Component/Api';
 import axios from 'axios';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const EditBin = ({navigation, route}) => {
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -105,7 +107,7 @@ const EditBin = ({navigation, route}) => {
     }
   };
 
-  const UpdateBin = () => {
+  const UpdateBin = async () => {
     var descriptionValid = false;
     if (descriptiontext.length == 0) {
       setDescriptionError('Description is required');
@@ -128,8 +130,9 @@ const EditBin = ({navigation, route}) => {
         location: locationtext,
         status: 1,
       };
+      let token = await AsyncStorage.getItem('LoginToken');
       axios
-        .post(updateBin, body)
+        .post(updateBin, body, {headers: {Authorization: token}})
         .then(async function (response) {
           if (response.data.error == false) {
             await Voice.destroy();
@@ -187,7 +190,7 @@ const EditBin = ({navigation, route}) => {
                 </View>
                 <View style={{marginLeft: 12, justifyContent: 'center'}}>
                   <Text style={customcss.collectionId}>
-                    #{route?.params?.sendData?.id}{' '}
+                    #{route?.params?.id}{' '}
                   </Text>
                 </View>
               </View>

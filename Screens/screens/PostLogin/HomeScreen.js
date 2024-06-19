@@ -58,9 +58,15 @@ const HomeScreen = ({navigation}) => {
     if (UserEmail) {
       setLoading(true);
       axios
-        .post(GetCollectionList, {
-          AccessToken: token,
-        })
+        .post(
+          GetCollectionList,
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          },
+        )
         .then(function (response) {
           setUserEmailData(UserEmail);
           setCollectionData(response?.data?.data);
@@ -88,7 +94,9 @@ const HomeScreen = ({navigation}) => {
           paddingLeft: 9,
           borderColor: '#E5E8F5',
         }}
-        onPress={() => navigation.navigate('ViewCollection', {id: item?.id})}>
+        onPress={() =>
+          navigation.navigate('ViewCollection', {id: item?.collection_id})
+        }>
         <View
           style={{
             height: 45,
@@ -124,7 +132,7 @@ const HomeScreen = ({navigation}) => {
                 color: '#141F42',
                 marginLeft: 3,
               }}>
-              {item?.id}
+              {item?.collection_id}
             </Text>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -186,7 +194,7 @@ const HomeScreen = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           data={collectiondata}
           renderItem={(item, index) => RenderCollectionData(item, index)}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item.id}
           contentContainerStyle={{
             flexGrow: 1,
             paddingBottom: 5,

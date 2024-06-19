@@ -33,11 +33,13 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
   const [isListening, setIsListening] = useState(false);
   const [isListening2, setIsListening2] = useState(false);
   const [deleteloading, setDeleteLoading] = useState(false);
-  const [nametext, setNameText] = useState(route?.params?.sendData?.name);
-  const [token, settoken] = useState('');
+  const [nametext, setNameText] = useState(
+    route?.params?.sendData?.name || 'Name',
+  );
   const [locationtext, setLocationText] = useState(
     route?.params?.sendData?.location,
   );
+  console.log(route.params?.sendData?.description);
   const [descriptiontext, setDescriptionText] = useState(
     route?.params?.sendData?.description,
   );
@@ -78,14 +80,8 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
         Voice.destroy().then(Voice.removeAllListeners);
       };
     };
-    handletoken();
     setUpVoice();
   }, []);
-
-  const handletoken = async () => {
-    let token = await AsyncStorage.getItem('LoginToken');
-    settoken(token);
-  };
 
   const onSpeechStart = event => {
     console.log('onSpeech Start ==>', event);
@@ -165,9 +161,10 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
       picoptionref.current.close();
     }
   };
-  const UpdateBinItemFunc = () => {
+  const UpdateBinItemFunc = async () => {
     //var nameValid = false;
     const pattern = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+    const token = await AsyncStorage.getItem('LoginToken');
     // if (nametext.length == 0) {
     //   setNameError('Name is required');
     // } else if (pattern.test(nametext) == false) {
@@ -207,7 +204,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
         formdata.append('location', locationtext);
         formdata.append('AccessToken', token);
         axios
-          .post(updateItem, formdata)
+          .post(updateItem, formdata, {headers: {Authorization: token}})
           .then(async function (response) {
             if (response?.data?.error == false) {
               await Voice.destroy();
@@ -235,10 +232,15 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
     ]);
   };
 
-  const DeleteItemFun = () => {
+  const DeleteItemFun = async () => {
+    const token = await AsyncStorage.getItem('LoginToken');
     setDeleteLoading(true);
     axios
-      .post(DeleteItem, {itemId: route?.params?.id})
+      .post(
+        DeleteItem,
+        {itemId: route?.params?.id},
+        {headers: {Authorization: token}},
+      )
       .then(function (response) {
         if (response?.data?.error == false) {
           navigation.pop(2);

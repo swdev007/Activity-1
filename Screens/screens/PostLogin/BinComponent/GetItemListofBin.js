@@ -28,6 +28,7 @@ import customcss from '../../assets/customcss';
 import BottomTab from '../../../Navigation/BottomTab';
 import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import VectorIcon from '../../Component/vectorIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GetItemListOfBin = ({route, navigation}) => {
   const [bindata, setBinData] = useState([]);
@@ -48,13 +49,19 @@ const GetItemListOfBin = ({route, navigation}) => {
     }
   }, [isfocused]);
 
-  const GetBinItemFunc = () => {
+  const GetBinItemFunc = async () => {
     setLoading(true);
+    let token = await AsyncStorage.getItem('LoginToken');
     axios
-      .post(GetItemList, {
-        binId: route?.params?.id,
-      })
+      .post(
+        GetItemList,
+        {
+          binId: route?.params?.id,
+        },
+        {headers: {Authorization: token}},
+      )
       .then(function (response) {
+        console.log(response.data.data);
         setBinData(response?.data?.data);
         setIsImageChange(false);
         setLoading(false);
@@ -65,7 +72,7 @@ const GetItemListOfBin = ({route, navigation}) => {
       });
   };
 
-  useFocusEffect(() => {
+  useEffect(() => {
     const backAction = () => {
       if (route?.params?.screenName === 'AddItem') {
         navigation.pop(2);
@@ -77,7 +84,7 @@ const GetItemListOfBin = ({route, navigation}) => {
     );
 
     return () => backHandler.remove();
-  }, []);
+  }, [navigation, route?.params?.screenName]);
 
   const HandleBackNavigation = () => {
     if (route?.params?.screenName === 'AddItem') {
@@ -115,7 +122,9 @@ const GetItemListOfBin = ({route, navigation}) => {
           paddingLeft: 9,
           borderColor: '#E5E8F5',
         }}
-        onPress={() => navigation.navigate('BinItemDetail', {id: item?.id})}>
+        onPress={() =>
+          navigation.navigate('BinItemDetail', {id: item?.evidence_id})
+        }>
         <TouchableOpacity
           style={{
             height: 45,
@@ -159,7 +168,7 @@ const GetItemListOfBin = ({route, navigation}) => {
                 color: '#141F42',
                 marginLeft: 3,
               }}>
-              {item.id}
+              {item.evidence_id}
             </Text>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -287,7 +296,7 @@ const GetItemListOfBin = ({route, navigation}) => {
               showsVerticalScrollIndicator={false}
               bounces={false}
               data={bindata}
-              keyExtractor={item => item.id.toString()}
+              keyExtractor={item => item?.evidence_id}
               renderItem={(item, index) => RenderCollectionData(item, index)}
               contentContainerStyle={{
                 flexGrow: 1,

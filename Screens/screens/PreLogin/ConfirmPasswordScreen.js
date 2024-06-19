@@ -54,6 +54,11 @@ const ConfirmPasswordScreen = ({navigation, route}) => {
       setPasswordError('');
     }
 
+    if (!authService.checkIfItIsAValidPassword(password)) {
+      setPasswordError('Password is not valid');
+      return;
+    }
+
     if (code.length === 0) {
       setCodeError('Code is required');
     } else {

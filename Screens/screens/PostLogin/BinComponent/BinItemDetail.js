@@ -13,6 +13,7 @@ import {GetItemDetails} from '../../Component/Api';
 import axios from 'axios';
 import BottomTab from '../../../Navigation/BottomTab';
 import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BinItemDetail = ({navigation, route}) => {
   const [bindetails, setBinDetails] = useState();
@@ -28,18 +29,24 @@ const BinItemDetail = ({navigation, route}) => {
       GetBinDetailsFunc();
     }
   }, [isFocused]);
-  const GetBinDetailsFunc = () => {
+  const GetBinDetailsFunc = async () => {
     setLoading(true);
+    let token = await AsyncStorage.getItem('LoginToken');
     axios
-      .post(GetItemDetails, {
-        itemId: route?.params?.id,
-      })
+      .post(
+        GetItemDetails,
+        {
+          itemId: route?.params?.id,
+        },
+        {headers: {Authorization: token}},
+      )
       .then(function (response) {
-        if (response?.data.error == false) {
-          console.log('cjndckjndkcd' + JSON.stringify(response));
+        if (response?.data.error === false) {
+          console.log(response.data.data);
           setBinDetails(response?.data?.data);
           setLoading(false);
         } else {
+          console.log(response.data);
           console.log('responsedata at get Bin detail', response?.data);
           setLoading(false);
         }
@@ -74,7 +81,7 @@ const BinItemDetail = ({navigation, route}) => {
       </View>
       <ScrollView style={customcss.viewcollectionmain}>
         <CollectionDetail
-          binId={bindetails?.id}
+          binId={route.params.id}
           binlocation={bindetails?.location}
           bindescription={bindetails?.description}
           image={bindetails?.image_url}

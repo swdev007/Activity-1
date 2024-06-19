@@ -23,6 +23,7 @@ import axios from 'axios';
 import BottomTab from '../../../Navigation/BottomTab';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Colors} from '../../Component/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EditCollection = ({navigation, route}) => {
   // console.log('', route);
@@ -125,7 +126,7 @@ const EditCollection = ({navigation, route}) => {
     }
   };
 
-  const SaveCollection = () => {
+  const SaveCollection = async () => {
     var descriptionValid = false;
     if (descriptiontext.length == 0) {
       setDescriptionError('Description is required');
@@ -149,8 +150,9 @@ const EditCollection = ({navigation, route}) => {
         location: locationtext,
         status: 1,
       };
+      let token = await AsyncStorage.getItem('LoginToken');
       axios
-        .post(updateCollection, body)
+        .post(updateCollection, body, {headers: {Authorization: token}})
         .then(async function (response) {
           if (response.data.error == false) {
             await Voice.destroy();
@@ -208,7 +210,7 @@ const EditCollection = ({navigation, route}) => {
                 </View>
                 <View style={{marginLeft: 12, justifyContent: 'center'}}>
                   <Text style={customcss.collectionId}>
-                    #{route?.params?.sendData?.id}{' '}
+                    #{route?.params?.sendData?.collection_id}{' '}
                   </Text>
                 </View>
               </View>
