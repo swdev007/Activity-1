@@ -24,6 +24,8 @@ import {AddItem} from '../../Component/Api';
 import ImagePicker from 'react-native-image-crop-picker';
 import {UploadSheet} from '../../Component/UploadSheet';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {debounce} from 'lodash';
+
 const AddCollectionList = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -44,7 +46,7 @@ const AddCollectionList = ({route, navigation}) => {
     setscreens(routes);
     Voice.onSpeechStart = onSpeechStart;
     Voice.onSpeechEnd = StopListening;
-    Voice.onSpeechResults = onSpeechResults;
+    Voice.onSpeechResults = debounce(onSpeechResults, 1000);
     Voice.onSpeechError = error => console.log('OnSpeechError', error);
 
     const AndroidPermissionChecking = async () => {

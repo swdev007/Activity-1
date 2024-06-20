@@ -21,6 +21,7 @@ import {updateBin} from '../../Component/Api';
 import axios from 'axios';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {debounce} from 'lodash';
 
 const EditBin = ({navigation, route}) => {
   const [loading, setLoading] = useState(false);
@@ -41,7 +42,7 @@ const EditBin = ({navigation, route}) => {
     setscreens(routes);
     Voice.onSpeechStart = onSpeechStart;
     Voice.onSpeechEnd = StopListening;
-    Voice.onSpeechResults = onSpeechResults;
+    Voice.onSpeechResults = debounce(onSpeechResults, 1000);
     Voice.onSpeechError = error => console.log('OnSpeechError', error);
 
     const AndroidPermissionChecking = async () => {

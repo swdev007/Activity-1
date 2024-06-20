@@ -28,6 +28,8 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {UploadSheet} from '../../Component/UploadSheet';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {debounce} from 'lodash';
+
 const UpdateDeleteBinItem = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -59,7 +61,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
       if (await Voice.isAvailable()) {
         Voice.onSpeechStart = onSpeechStart;
         Voice.onSpeechEnd = StopListening;
-        Voice.onSpeechResults = onSpeechResults;
+        Voice.onSpeechResults = debounce(onSpeechResults, 1000);
         Voice.onSpeechError = error => {
           console.log('OnSpeechError', error), Voice.cancel();
         };

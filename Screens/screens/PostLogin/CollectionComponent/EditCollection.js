@@ -24,6 +24,7 @@ import BottomTab from '../../../Navigation/BottomTab';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Colors} from '../../Component/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {debounce} from 'lodash';
 
 const EditCollection = ({navigation, route}) => {
   // console.log('', route);
@@ -50,7 +51,7 @@ const EditCollection = ({navigation, route}) => {
     setscreens(routes);
     Voice.onSpeechStart = onSpeechStart;
     Voice.onSpeechEnd = StopListening;
-    Voice.onSpeechResults = onSpeechResults;
+    Voice.onSpeechResults = debounce(onSpeechResults, 1000);
     Voice.onSpeechError = error => console.log('OnSpeechError', error);
     const AndroidPermissionChecking = async () => {
       if (Platform.OS === 'android') {
