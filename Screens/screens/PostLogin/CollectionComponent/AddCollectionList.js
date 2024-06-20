@@ -184,7 +184,7 @@ const AddCollectionList = ({route, navigation}) => {
   //           .post(AddItem, formdata)
   //           .then(function (response) {
   //             if (response?.data?.error == false) {
-  //               navigation.navigate('GetItemListOfWarrant', {
+  //               navigation.navigate('GetItemListOfBin', {
   //                 id: route?.params?.id,
   //                 screenName: 'AddItem',
   //               });

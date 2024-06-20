@@ -209,7 +209,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
             if (response?.data?.error == false) {
               await Voice.destroy();
               Voice.removeAllListeners();
-              navigation.navigate('WarrantItemDetail', {id: route?.params?.id});
+              navigation.navigate('BinItemDetail', {id: route?.params?.id});
               setLoading(false);
             }
           })
@@ -222,14 +222,18 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
   };
 
   const handleDeleteItemFunc = () => {
-    Alert.alert('Delete Evidence', 'Are you sure, you want to delete the evidence', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => DeleteItemFun()},
-    ]);
+    Alert.alert(
+      'Delete Evidence',
+      'Are you sure, you want to delete the evidence',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => DeleteItemFun()},
+      ],
+    );
   };
 
   const DeleteItemFun = async () => {

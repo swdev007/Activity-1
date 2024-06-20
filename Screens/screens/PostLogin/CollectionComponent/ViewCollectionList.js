@@ -151,7 +151,7 @@ const ViewCollectionList = ({navigation, route}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('WarrantList', {id: route?.params?.id})
+              navigation.navigate('BinList', {id: route?.params?.id})
             }
           />
         </View>

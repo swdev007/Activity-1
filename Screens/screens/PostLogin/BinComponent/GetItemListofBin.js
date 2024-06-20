@@ -74,7 +74,7 @@ const GetItemListOfBin = ({route, navigation}) => {
 
   useEffect(() => {
     const backAction = () => {
-      if (route?.params?.screenName === 'AddEvidence') {
+      if (route?.params?.screenName === 'AddItem') {
         navigation.pop(2);
       }
     };
@@ -87,7 +87,7 @@ const GetItemListOfBin = ({route, navigation}) => {
   }, [navigation, route?.params?.screenName]);
 
   const HandleBackNavigation = () => {
-    if (route?.params?.screenName === 'AddEvidence') {
+    if (route?.params?.screenName === 'AddItem') {
       navigation.pop(2);
     } else {
       navigation.pop(1);
@@ -123,7 +123,7 @@ const GetItemListOfBin = ({route, navigation}) => {
           borderColor: '#E5E8F5',
         }}
         onPress={() =>
-          navigation.navigate('WarrantEvidenceDetail', {id: item?.evidence_id})
+          navigation.navigate('BinItemDetail', {id: item?.evidence_id})
         }>
         <TouchableOpacity
           style={{
@@ -321,7 +321,7 @@ const GetItemListOfBin = ({route, navigation}) => {
             <CommonBtnWithIcon
               title={'Add Evidence'}
               onPress={() =>
-                navigation.navigate('AddNewEvidence', {id: route?.params?.id})
+                navigation.navigate('AddNewItem', {id: route?.params?.id})
               }
               source={require('../../Component/Image/additem.png')}
               style={{

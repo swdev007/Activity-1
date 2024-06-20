@@ -165,7 +165,7 @@ const AddUpdate = ({navigation, route}) => {
           <View style={{marginBottom: 9}}>
             <CommonBtnForViewItem
               onPress={() =>
-                navigation.navigate('ViewCaseList', {
+                navigation.navigate('ViewCollectionList', {
                   id: route?.params?.id,
                 })
               }

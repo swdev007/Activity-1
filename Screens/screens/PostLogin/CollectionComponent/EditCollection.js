@@ -157,7 +157,7 @@ const EditCollection = ({navigation, route}) => {
           if (response.data.error == false) {
             await Voice.destroy();
             Voice.removeAllListeners();
-            navigation.navigate('ViewCase', {id: route?.params?.id});
+            navigation.navigate('ViewCollection', {id: route?.params?.id});
             setLoading(false);
           } else if (response.data.error == true) {
             setDescriptionError(response?.data?.message?.description[0]);

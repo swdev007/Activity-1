@@ -276,7 +276,9 @@ export function CommonBtnForViewItem({onPress}) {
         marginStart: 17,
         marginEnd: 17,
       }}>
-      <AppText style={[styles.btntxt, {color: '#0F48FF'}]}>View evidence</AppText>
+      <AppText style={[styles.btntxt, {color: '#0F48FF'}]}>
+        View evidence
+      </AppText>
     </TouchableComponent>
   );
 }

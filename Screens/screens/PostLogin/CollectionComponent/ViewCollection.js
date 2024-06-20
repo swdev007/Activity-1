@@ -97,7 +97,7 @@ const ViewCollection = ({navigation, route}) => {
               navigation.navigate('ViewCollectionList', {id: route?.params?.id})
             }
             // onPress={() =>
-            //   navigation.navigate('WarrantList', {id: route?.params?.id})
+            //   navigation.navigate('BinList', {id: route?.params?.id})
             // }
           /> */}
 
@@ -112,9 +112,9 @@ const ViewCollection = ({navigation, route}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('WarrantList', {
+              navigation.navigate('BinList', {
                 id: route?.params?.id,
-                screenName: 'ViewCase',
+                screenName: 'ViewCollection',
               })
             }
           />

@@ -101,7 +101,7 @@ const BinItemDetail = ({navigation, route}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('UpdateDeleteWarrantItem', {
+              navigation.navigate('UpdateDeleteBinItem', {
                 id: route?.params?.id,
                 sendData: bindetails,
               })

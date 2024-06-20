@@ -208,9 +208,9 @@ const AddNewItem = ({route, navigation}) => {
               await Voice.destroy();
               Voice.removeAllListeners();
 
-              navigation.navigate('GetEvidenceListOfWarrant', {
+              navigation.navigate('GetItemListOfBin', {
                 id: route?.params?.id,
-                screenName: 'AddEvidence',
+                screenName: 'AddItem',
               });
               setLoading(false);
             }

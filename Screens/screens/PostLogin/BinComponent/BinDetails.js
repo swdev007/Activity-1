@@ -83,10 +83,10 @@ const BinDetails = ({route, navigation}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('EditWarrant', {
+              navigation.navigate('EditBin', {
                 id: route?.params?.id,
                 sendData: bindetails,
-                screenPath: 'Edit Warrant',
+                screenPath: 'Edit Bin',
               })
             }
           />
@@ -113,7 +113,7 @@ const BinDetails = ({route, navigation}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('GetEvidenceListOfWarrant', {id: route?.params?.id})
+              navigation.navigate('GetItemListOfBin', {id: route?.params?.id})
             }
           />
           {/* <CommonBtnWithIcon
@@ -139,7 +139,7 @@ const BinDetails = ({route, navigation}) => {
             }}
             width={screenWidth - 40}
             onPress={() =>
-              navigation.navigate('AddNewEvidence', {id: route?.params?.id})
+              navigation.navigate('AddNewItem', {id: route?.params?.id})
             }
           />
           {/* <CommonBtnWithIcon

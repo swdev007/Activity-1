@@ -60,7 +60,7 @@ const BinList = ({route, navigation}) => {
           borderColor: '#E5E8F5',
         }}
         onPress={() =>
-          navigation.navigate('WarrantDetails', {
+          navigation.navigate('BinDetails', {
             id: item?.warrant_id,
             screenPath: item?.bin_name,
           })

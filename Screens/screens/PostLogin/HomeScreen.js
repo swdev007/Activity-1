@@ -95,7 +95,7 @@ const HomeScreen = ({navigation}) => {
           borderColor: '#E5E8F5',
         }}
         onPress={() =>
-          navigation.navigate('ViewCase', {id: item?.collection_id})
+          navigation.navigate('ViewCollection', {id: item?.collection_id})
         }>
         <View
           style={{
