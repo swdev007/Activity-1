@@ -1,5 +1,5 @@
 // const baseurl = 'http://192.168.0.71:8666/api/';
-const baseurl = 'https://eklipse.shinedezign.pro/api/';
+const baseurl = 'http://3.236.161.85/api/';
 
 export const login = baseurl + 'login'; //body => username, password
 export const logout = baseurl + 'logout'; //body=>AccessToken
