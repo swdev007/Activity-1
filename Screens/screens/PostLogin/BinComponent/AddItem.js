@@ -202,11 +202,12 @@ const AddNewItem = ({route, navigation}) => {
         formdata.append('location', locationtext);
         let token = await AsyncStorage.getItem('LoginToken');
         formdata.append('AccessToken', token);
-        console.log(AddItem, token);
         axios
-          .post(AddItem, formdata, {headers: {Authorization: token}})
+          .post(AddItem, formdata, {
+            headers: {Authorization: token},
+          })
           .then(async function (response) {
-            if (response?.data?.error == false) {
+            if (response?.data?.error === false) {
               await Voice.destroy();
               Voice.removeAllListeners();
 

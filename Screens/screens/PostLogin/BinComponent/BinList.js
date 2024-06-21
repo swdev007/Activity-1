@@ -37,7 +37,6 @@ const BinList = ({route, navigation}) => {
         {headers: {Authorization: token}},
       )
       .then(function (response) {
-        console.log(response.data.data);
         setCollectionData(response?.data?.data);
         setLoading(false);
       })

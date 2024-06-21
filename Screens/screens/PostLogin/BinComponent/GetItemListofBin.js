@@ -61,7 +61,6 @@ const GetItemListOfBin = ({route, navigation}) => {
         {headers: {Authorization: token}},
       )
       .then(function (response) {
-        console.log(response.data.data);
         setBinData(response?.data?.data);
         setIsImageChange(false);
         setLoading(false);
@@ -255,8 +254,6 @@ const GetItemListOfBin = ({route, navigation}) => {
       axios
         .post(updateItem, formdata)
         .then(function (response) {
-          console.log('responseData', response.data);
-
           if (response?.data?.error == false) {
             setIsUploading(false);
             setModalVisible(false);

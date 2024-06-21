@@ -41,7 +41,6 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
   const [locationtext, setLocationText] = useState(
     route?.params?.sendData?.location,
   );
-  console.log(route.params?.sendData?.description);
   const [descriptiontext, setDescriptionText] = useState(
     route?.params?.sendData?.description,
   );

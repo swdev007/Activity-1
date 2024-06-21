@@ -42,11 +42,9 @@ const BinItemDetail = ({navigation, route}) => {
       )
       .then(function (response) {
         if (response?.data.error === false) {
-          console.log(response.data.data);
           setBinDetails(response?.data?.data);
           setLoading(false);
         } else {
-          console.log(response.data);
           console.log('responsedata at get Warrant detail', response?.data);
           setLoading(false);
         }
