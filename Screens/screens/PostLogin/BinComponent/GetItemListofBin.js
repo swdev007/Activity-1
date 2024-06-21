@@ -100,8 +100,8 @@ const GetItemListOfBin = ({route, navigation}) => {
       image: item?.image_url,
       location: item?.location,
       description: item?.description,
-      binId: item?.id,
-      name: item?.name,
+      binId: item?.evidence_id,
+      name: item?.description,
     });
     setTimeout(() => {
       setModalVisible(true);
@@ -236,7 +236,7 @@ const GetItemListOfBin = ({route, navigation}) => {
     }
   };
 
-  const handleCreateItem = () => {
+  const handleCreateItem = async () => {
     setIsUploading(true);
     if (imagepath) {
       setLoading(true);
@@ -247,12 +247,14 @@ const GetItemListOfBin = ({route, navigation}) => {
         name: 'image.jpg',
         type: 'image/jpeg',
       });
+      const token = await AsyncStorage.getItem('LoginToken');
       formdata.append('itemId', imageurlbyid?.binId);
       formdata.append('name', imageurlbyid?.name);
       formdata.append('description', imageurlbyid?.description);
       formdata.append('location', imageurlbyid?.location);
+      formdata.append('AccessToken', token);
       axios
-        .post(updateItem, formdata)
+        .post(updateItem, formdata, {headers: {Authorization: token}})
         .then(function (response) {
           if (response?.data?.error == false) {
             setIsUploading(false);
