@@ -84,7 +84,7 @@ const ViewProfile = ({navigation}) => {
               )}
             </Pressable>
           </View>
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: 20, marginBottom: 20}}>
             <Text style={customcss.nametext}> Password </Text>
             <TextInput
               style={customcss.textinput}
@@ -119,44 +119,6 @@ const ViewProfile = ({navigation}) => {
               )}
             </Pressable>
           </View>
-          <View
-            style={{
-              marginTop: 12,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginBottom: 14,
-            }}>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                source={require('../Component/Image/fingerprint.png')}
-                style={customcss.fingerprint}
-              />
-              <Text style={customcss.biometrictxt}> Biometric Mode</Text>
-            </View>
-            <TouchableOpacity
-              style={{
-                height: 30,
-                width: 40,
-                alignItems: 'center',
-              }}
-              onPress={() => setIsEnabled(!isEnabled)}>
-              {isEnabled ? (
-                <VectorIcon
-                  groupName={'FontAwesome5'}
-                  name={'toggle-off'}
-                  size={25}
-                  color={'#1F54FD'}
-                />
-              ) : (
-                <VectorIcon
-                  groupName={'FontAwesome5'}
-                  name={'toggle-on'}
-                  size={25}
-                  color={'#1F54FD'}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
         </View>
         <View style={customcss.Editcollectioncont22}>
           <View style={customcss.infocont}>
@@ -181,7 +143,7 @@ const ViewProfile = ({navigation}) => {
         </View>
         <View style={customcss.Editcollectioncont22}>
           <View style={customcss.infocont}>
-            <Text style={customcss.contacttxt}> About inventory tracker </Text>
+            <Text style={customcss.contacttxt}> About SWIPE </Text>
           </View>
           <View style={customcss.information}>
             <View style={customcss.informationtxtcont}>

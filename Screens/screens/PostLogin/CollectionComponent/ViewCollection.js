@@ -64,7 +64,10 @@ const ViewCollection = ({navigation, route}) => {
         <CustomHeaderNavigation data={screens} currentname={route.name} />
       </View>
       <ScrollView style={customcss.viewcollectionmain}>
-        <CollectionDetail id={route?.params?.id} />
+        <CollectionDetail
+          id={route?.params?.id}
+          name={collectiondetail?.name || ''}
+        />
         <View style={{marginTop: 15}}>
           <CommonBtnWithIcon
             title={'Edit Case'}

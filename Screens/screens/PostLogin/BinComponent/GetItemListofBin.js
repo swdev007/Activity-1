@@ -290,7 +290,23 @@ const GetItemListOfBin = ({route, navigation}) => {
       </View>
       {bindata.length ? (
         <View style={customcss.viewcollectionmain1}>
-          <View style={{flex: 1, marginTop: 20}}>
+          <View style={{flex: 1, marginTop: 5, marginBottom: 20}}>
+            <CommonBtnWithIcon
+              title={'Add Evidence'}
+              onPress={() =>
+                navigation.navigate('AddNewItem', {id: route?.params?.id})
+              }
+              source={require('../../Component/Image/additem.png')}
+              style={{
+                tintColor: '#1F54FD',
+                height: 13,
+                width: 13,
+                resizeMode: 'contain',
+                marginRight: 8,
+              }}
+              width={screenWidth - 40}
+            />
+
             <FlatList
               showsVerticalScrollIndicator={false}
               bounces={false}

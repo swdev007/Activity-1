@@ -15,6 +15,7 @@ const customcss = StyleSheet.create({
     fontWeight: '600',
     marginTop: 41,
     fontFamily: Fonts.Inter,
+    textAlign: 'center',
   },
   Loginmodal: {
     marginStart: 20,

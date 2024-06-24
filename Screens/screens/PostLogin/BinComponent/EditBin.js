@@ -248,8 +248,7 @@ const EditBin = ({navigation, route}) => {
                       textAlignVertical="top"
                       multiline={true}
                       style={customcss.inputcont1}
-                      placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting
-                    industry"
+                      placeholder="Enter Description"
                       placeholderTextColor={'#727582'}
                       value={descriptiontext}
                       onChangeText={text => setDescriptionText(text)}

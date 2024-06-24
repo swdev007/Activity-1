@@ -211,10 +211,7 @@ const AddNewItem = ({route, navigation}) => {
               await Voice.destroy();
               Voice.removeAllListeners();
 
-              navigation.navigate('GetItemListOfBin', {
-                id: route?.params?.id,
-                screenName: 'AddItem',
-              });
+              navigation.goBack();
               setLoading(false);
             }
           })

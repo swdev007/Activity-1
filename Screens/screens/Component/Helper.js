@@ -345,7 +345,7 @@ export function CollectionDetail({
             <Text style={customcss.collectionId}>#{binId}</Text>
           ) : (
             <Text style={customcss.collectionId}>
-              #{collectiondetail?.collection_id}
+              #{collectiondetail?.external_case_number}
             </Text>
           )}
         </View>
@@ -906,6 +906,25 @@ export function CommonInput({
 
 export function CustomHeaderNavigation({data, currentname}) {
   const navigation = useNavigation();
+  const getName = name => {
+    switch (name) {
+      case 'ViewCollection': {
+        return 'View Case';
+      }
+      case 'BinList': {
+        return 'Warrant List';
+      }
+      case 'BinDetails': {
+        return 'Warrant Evidence';
+      }
+      case 'GetItemListOfBin': {
+        return 'Evidence List';
+      }
+      default: {
+        return name;
+      }
+    }
+  };
   return (
     <View>
       <FlatList
@@ -919,7 +938,9 @@ export function CustomHeaderNavigation({data, currentname}) {
           <>
             {item.name !== currentname ? (
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <AppText style={{color: Colors.black}}>{item.name}</AppText>
+                <AppText style={{color: Colors.black}}>
+                  {getName(item.name)}
+                </AppText>
                 <VectorIcon groupName={'AntDesign'} name={'right'} />
               </View>
             ) : null}

@@ -132,7 +132,7 @@ const HomeScreen = ({navigation}) => {
                 color: '#141F42',
                 marginLeft: 3,
               }}>
-              {item?.collection_id}
+              {item?.external_case_number}
             </Text>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -194,7 +194,7 @@ const HomeScreen = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           data={collectiondata}
           renderItem={(item, index) => RenderCollectionData(item, index)}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.collection_id}
           contentContainerStyle={{
             flexGrow: 1,
             paddingBottom: 5,

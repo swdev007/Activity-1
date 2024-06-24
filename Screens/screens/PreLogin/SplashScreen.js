@@ -30,7 +30,9 @@ const SplashScreen = () => {
               source={require('../Component/Image/splashlogo2.png')}
               style={customcss.ImageBackgroundcss}
             />
-            <Text style={customcss.inventorytext}> Inventory Tracker </Text>
+            <Text style={customcss.inventorytext}>
+              Search Warrant Inventory Processing of Evidence
+            </Text>
           </View>
         </ImageBackground>
       </View>
@@ -40,7 +42,7 @@ const SplashScreen = () => {
           style={{height: 200, width: '40%', resizeMode: 'contain'}}
         />
         <CommonBtn
-          title={'Inventory Tracker'}
+          title={'SWIPE'}
           onPress={() => handleLogin()}
           // onPress={() => navigation.navigate('LoginScreen')}
           backgroundColor={'#0F48FF'}
@@ -48,10 +50,9 @@ const SplashScreen = () => {
         />
       </View>
       <View style={{marginTop: 'auto', marginBottom: 26, alignItems: 'center'}}>
-        <Image
-          source={require('../Component/Image/splashlogo2.png')}
-          style={{height: 38, width: '50%', resizeMode: 'contain'}}
-        />
+        <Text style={customcss.nametext}>
+          Copyright 2024 (C) Eklipse AI LLC
+        </Text>
       </View>
     </View>
   );

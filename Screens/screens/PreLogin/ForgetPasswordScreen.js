@@ -92,7 +92,7 @@ const ForgetPasswordScreen = ({navigation}) => {
                 source={require('../Component/Image/splashlogo2.png')}
                 style={customcss.ImageBackgroundcss}
               />
-              <Text style={customcss.inventorytext}> Inventory Tracker </Text>
+              <Text style={customcss.inventorytext}> Swipe </Text>
             </View>
             <View style={customcss.Loginmodal}>
               <View style={customcss.logintextcont}>

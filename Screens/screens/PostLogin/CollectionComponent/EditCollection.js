@@ -158,7 +158,7 @@ const EditCollection = ({navigation, route}) => {
           if (response.data.error == false) {
             await Voice.destroy();
             Voice.removeAllListeners();
-            navigation.navigate('ViewCollection', {id: route?.params?.id});
+            navigation.navigate('ViewCase', {id: route?.params?.id});
             setLoading(false);
           } else if (response.data.error == true) {
             setDescriptionError(response?.data?.message?.description[0]);
@@ -269,8 +269,7 @@ const EditCollection = ({navigation, route}) => {
                       textAlignVertical="top"
                       multiline={true}
                       style={[customcss.inputcont1, {color: Colors.black}]}
-                      placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry"
+                      placeholder="Enter Description"
                       placeholderTextColor={'#727582'}
                       value={descriptiontext}
                       onChangeText={text => setDescriptionText(text)}
@@ -335,8 +334,7 @@ const EditCollection = ({navigation, route}) => {
                       textAlignVertical="top"
                       multiline={true}
                       style={[customcss.inputcont1, {color: Colors.black}]}
-                      placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting
-                    industry"
+                      placeholder="Enter Location"
                       value={locationtext}
                       onChangeText={text => setLocationText(text)}
                       placeholderTextColor={'#727582'}
