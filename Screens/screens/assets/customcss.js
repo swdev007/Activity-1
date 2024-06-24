@@ -16,6 +16,7 @@ const customcss = StyleSheet.create({
     marginTop: 41,
     fontFamily: Fonts.Inter,
     textAlign: 'center',
+    paddingHorizontal: 20,
   },
   Loginmodal: {
     marginStart: 20,
