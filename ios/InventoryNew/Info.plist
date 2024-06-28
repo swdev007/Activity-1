@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>PWA</string>
+	<string>SWIPE</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -56,15 +56,15 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>PWA Inventory app requires this permission to update profile picture</string>
+	<string>Swipe Inventory app requires this permission to update profile picture</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Description of why you require the use of the microphone</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>PWA Inventory app requires this permission to update profile picture</string>
+	<string>Swipe Inventory app requires this permission to update profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>PWA Inventory app requires this permission to update profile picture</string>
+	<string>Swipe Inventory app requires this permission to update profile picture</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Description of why you require the use of the speech recognition</string>
 	<key>UIAppFonts</key>

@@ -57,6 +57,9 @@ const LoginScreen = ({navigation}) => {
           AsyncStorage.setItem(STORAGE_TYPE.RefreshToken, refresh_token);
           AsyncStorage.setItem(STORAGE_TYPE.IdToken, id_token);
           AsyncStorage.setItem(STORAGE_TYPE.UserEmail, userDetails.email);
+          try {
+            await authService.updateDeviceId(uniqueId, access_token);
+          } catch (error) {}
           navigation.navigate('Homes');
         } else {
           await AsyncStorage.clear();

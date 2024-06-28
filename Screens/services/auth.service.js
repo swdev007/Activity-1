@@ -5,6 +5,8 @@ import {
   TokenByCode,
   ForgotPassword,
   ResetPassword,
+  UpdateDevice,
+  ResetPasswordLoggedIn,
 } from '../screens/Component/Api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {STORAGE_TYPE} from '../enums/storage.enums';
@@ -110,5 +112,35 @@ export class AuthService {
     )
       ? true
       : false;
+  }
+
+  updateDeviceId(deviceId, token) {
+    return axios.post(
+      UpdateDevice,
+      {
+        deviceId,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+  }
+
+  async changePassword(oldPassword, password) {
+    const token = await AsyncStorage.getItem('LoginToken');
+    return axios.post(
+      ResetPasswordLoggedIn,
+      {
+        oldPassword,
+        password,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
   }
 }

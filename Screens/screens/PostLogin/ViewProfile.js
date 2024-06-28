@@ -4,8 +4,6 @@ import {
   Image,
   Text,
   View,
-  Switch,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -15,9 +13,12 @@ import {
   useTogglePasswordVisibility,
   useTogglePasswordVisibility2,
 } from '../PreLogin/useTogglePasswordVisibility';
-import VectorIcon from '../Component/vectorIcons';
 import BottomTab from '../../Navigation/BottomTab';
+import {AuthService} from '../../services/auth.service';
+import {CommonBtn1} from '../Component/Helper';
+import {useToast} from 'react-native-toast-notifications';
 
+const authService = new AuthService();
 const ViewProfile = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
@@ -26,9 +27,41 @@ const ViewProfile = ({navigation}) => {
   const {passwordVisibility2, rightIcon2, handlePasswordVisibility2} =
     useTogglePasswordVisibility2();
   const [isEnabled, setIsEnabled] = useState(false);
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
 
-  console.log(rightIcon2, 'righticon -->', rightIcon);
-
+  const changePassword = async () => {
+    try {
+      if (
+        !password ||
+        !password2 ||
+        !authService.checkIfItIsAValidPassword(password) ||
+        !authService.checkIfItIsAValidPassword(password2)
+      ) {
+        return;
+      }
+      setLoading(true);
+      const res = await authService.changePassword(password, password2);
+      setLoading(false);
+      if (res.data.error === true) {
+        toast.show(res.data.message, {
+          type: 'danger',
+          placement: 'top',
+        });
+      } else {
+        toast.show('Password updated successfully!', {
+          type: 'success',
+          placement: 'top',
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.show(error.message, {
+        type: 'danger',
+        placement: 'top',
+      });
+    }
+  };
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View>
@@ -50,14 +83,21 @@ const ViewProfile = ({navigation}) => {
             <Text style={customcss.chngepass}> Change Password</Text>
           </View>
           <View style={{marginTop: 20}}>
-            <Text style={customcss.nametext}> Password </Text>
+            <Text style={customcss.nametext}>Current Password </Text>
             <TextInput
               style={customcss.textinput}
-              placeholder="Enter new password"
+              placeholder="Enter current password"
               placeholderTextColor={'#727582'}
               secureTextEntry={passwordVisibility}
               value={password}
-              onChangeText={text => setPassword(text)}
+              onChangeText={text => {
+                if (!authService.checkIfItIsAValidPassword(text)) {
+                  setIsEnabled(false);
+                } else {
+                  setIsEnabled(true);
+                }
+                setPassword(text);
+              }}
               maxLength={30}
             />
             <Pressable
@@ -84,8 +124,8 @@ const ViewProfile = ({navigation}) => {
               )}
             </Pressable>
           </View>
-          <View style={{marginTop: 20, marginBottom: 20}}>
-            <Text style={customcss.nametext}> Password </Text>
+          <View style={{marginTop: 20}}>
+            <Text style={customcss.nametext}>New Password </Text>
             <TextInput
               style={customcss.textinput}
               placeholder="Enter new password"
@@ -94,6 +134,7 @@ const ViewProfile = ({navigation}) => {
               value={password2}
               onChangeText={text => setPassword2(text)}
               maxLength={30}
+              editable={isEnabled ? true : false}
             />
             <Pressable
               style={{
@@ -118,6 +159,15 @@ const ViewProfile = ({navigation}) => {
                 />
               )}
             </Pressable>
+          </View>
+
+          <View style={{marginTop: 20, marginBottom: 20}}>
+            <CommonBtn1
+              title={'Change Password'}
+              onPress={loading ? () => {} : () => changePassword()}
+              color={'#fff'}
+              loading={loading}
+            />
           </View>
         </View>
         <View style={customcss.Editcollectioncont22}>

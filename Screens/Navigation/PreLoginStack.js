@@ -14,7 +14,6 @@ export default function PreLoginStack() {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Stack.Screen name="InitialSplash" component={InitialSplash} /> */}
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen

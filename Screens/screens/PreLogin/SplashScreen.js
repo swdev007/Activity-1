@@ -38,7 +38,7 @@ const SplashScreen = () => {
       </View>
       <View style={{alignItems: 'center', marginTop: -100}}>
         <Image
-          source={require('../Component/Image/splashlogo.png')}
+          source={require('../Component/Image/splash.png')}
           style={{height: 200, width: '40%', resizeMode: 'contain'}}
         />
         <CommonBtn
