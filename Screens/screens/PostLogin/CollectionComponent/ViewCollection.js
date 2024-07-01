@@ -38,7 +38,7 @@ const ViewCollection = ({navigation, route}) => {
         {
           collectionId: route?.params?.id,
         },
-        {headers: {Authorization: token}},
+        {headers: {Authorization: 'Bearer ' + token}},
       )
       .then(function (response) {
         setCollectionDetail(response.data.data);

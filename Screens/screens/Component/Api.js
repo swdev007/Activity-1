@@ -18,5 +18,5 @@ export const TokenByCode = baseurl + 'GetTokenByCode'; // body=> code, uniqueCod
 export const RefreshToken = baseurl + 'RefreshToken'; // body=> refresh_token
 export const ForgotPassword = baseurl + 'forgotPassword'; // body => email
 export const ResetPassword = baseurl + 'resetPassword'; // body=> email, password, otp
-export const UpdateDevice = baseurl + 'updateDevice'; // body => deviceId
+export const UpdateDevice = baseurl + 'UpdateDevice'; // body => deviceId
 export const ResetPasswordLoggedIn = baseurl + 'ResetPasswordLoggedIn';

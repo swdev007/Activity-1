@@ -312,7 +312,7 @@ export function CollectionDetail({
           collectionId: id,
         },
         {
-          headers: {Authorization: token},
+          headers: {Authorization: 'Bearer ' + token},
         },
       )
       .then(function (response) {

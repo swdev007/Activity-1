@@ -58,7 +58,7 @@ const GetItemListOfBin = ({route, navigation}) => {
         {
           binId: route?.params?.id,
         },
-        {headers: {Authorization: token}},
+        {headers: {Authorization: 'Bearer ' + token}},
       )
       .then(function (response) {
         setBinData(response?.data?.data);
@@ -254,7 +254,9 @@ const GetItemListOfBin = ({route, navigation}) => {
       formdata.append('location', imageurlbyid?.location);
       formdata.append('AccessToken', token);
       axios
-        .post(updateItem, formdata, {headers: {Authorization: token}})
+        .post(updateItem, formdata, {
+          headers: {Authorization: 'Bearer ' + token},
+        })
         .then(function (response) {
           if (response?.data?.error == false) {
             setIsUploading(false);

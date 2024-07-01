@@ -63,7 +63,7 @@ const HomeScreen = ({navigation}) => {
           {},
           {
             headers: {
-              Authorization: token,
+              Authorization: 'Bearer ' + token,
             },
           },
         )

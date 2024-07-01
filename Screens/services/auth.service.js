@@ -12,8 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {STORAGE_TYPE} from '../enums/storage.enums';
 
 export const CLIENT_ID = '29vqv28ta310uqd3q0ug7kkavk';
-export const LOGIN_URL = `https://dev-swipelogin.eklipseai.com/oauth2/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=pwa://`;
-export const LOGOUT_URL = `https://dev-swipelogin.eklipseai.com/logout?client_id=${CLIENT_ID}&response_type=code&redirect_uri=pwa://`;
+export const LOGIN_URL = `https://dev-swipelogin.eklipseai.com/oauth2/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=swipe://`;
+export const LOGOUT_URL = `https://dev-swipelogin.eklipseai.com/logout?client_id=${CLIENT_ID}&response_type=code&redirect_uri=swipe://`;
 
 export class AuthService {
   async isTokenExpired() {
@@ -122,7 +122,7 @@ export class AuthService {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: 'Bearer ' + token,
         },
       },
     );
@@ -138,7 +138,7 @@ export class AuthService {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: 'Bearer ' + token,
         },
       },
     );

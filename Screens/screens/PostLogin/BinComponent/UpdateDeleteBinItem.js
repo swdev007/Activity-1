@@ -205,7 +205,9 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
         formdata.append('location', locationtext);
         formdata.append('AccessToken', token);
         axios
-          .post(updateItem, formdata, {headers: {Authorization: token}})
+          .post(updateItem, formdata, {
+            headers: {Authorization: 'Bearer ' + token},
+          })
           .then(async function (response) {
             if (response?.data?.error == false) {
               await Voice.destroy();
@@ -244,7 +246,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
       .post(
         DeleteItem,
         {itemId: route?.params?.id},
-        {headers: {Authorization: token}},
+        {headers: {Authorization: 'Bearer ' + token}},
       )
       .then(function (response) {
         if (response?.data?.error == false) {

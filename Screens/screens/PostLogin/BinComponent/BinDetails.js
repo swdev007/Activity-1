@@ -38,7 +38,7 @@ const BinDetails = ({route, navigation}) => {
         {
           binId: route?.params?.id,
         },
-        {headers: {Authorization: token}},
+        {headers: {Authorization: 'Bearer ' + token}},
       )
       .then(function (response) {
         console.log(response.data.data);

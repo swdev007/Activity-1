@@ -38,7 +38,7 @@ const BinItemDetail = ({navigation, route}) => {
         {
           itemId: route?.params?.id,
         },
-        {headers: {Authorization: token}},
+        {headers: {Authorization: 'Bearer ' + token}},
       )
       .then(function (response) {
         if (response?.data.error === false) {

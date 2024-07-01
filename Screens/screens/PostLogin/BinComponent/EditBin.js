@@ -133,7 +133,7 @@ const EditBin = ({navigation, route}) => {
       };
       let token = await AsyncStorage.getItem('LoginToken');
       axios
-        .post(updateBin, body, {headers: {Authorization: token}})
+        .post(updateBin, body, {headers: {Authorization: 'Bearer ' + token}})
         .then(async function (response) {
           if (response.data.error == false) {
             await Voice.destroy();

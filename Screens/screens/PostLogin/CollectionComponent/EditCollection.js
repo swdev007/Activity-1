@@ -153,7 +153,9 @@ const EditCollection = ({navigation, route}) => {
       };
       let token = await AsyncStorage.getItem('LoginToken');
       axios
-        .post(updateCollection, body, {headers: {Authorization: token}})
+        .post(updateCollection, body, {
+          headers: {Authorization: 'Bearer ' + token},
+        })
         .then(async function (response) {
           if (response.data.error == false) {
             await Voice.destroy();

@@ -34,7 +34,7 @@ const BinList = ({route, navigation}) => {
         {
           collectionId: route?.params?.id,
         },
-        {headers: {Authorization: token}},
+        {headers: {Authorization: 'Bearer ' + token}},
       )
       .then(function (response) {
         setCollectionData(response?.data?.data);

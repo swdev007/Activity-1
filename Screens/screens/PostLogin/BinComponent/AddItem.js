@@ -204,7 +204,7 @@ const AddNewItem = ({route, navigation}) => {
         formdata.append('AccessToken', token);
         axios
           .post(AddItem, formdata, {
-            headers: {Authorization: token},
+            headers: {Authorization: 'Bearer ' + token},
           })
           .then(async function (response) {
             if (response?.data?.error === false) {
