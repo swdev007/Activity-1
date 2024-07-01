@@ -127,7 +127,7 @@ const AddNewItem = ({route, navigation}) => {
       ImagePicker.openCamera({
         width: 300,
         height: 400,
-        cropping: true,
+        cropping: false,
       }).then(image => {
         if (image.size > 10000000) {
           alert('File size is greater than 10 Mb');
