@@ -53,6 +53,9 @@ const ViewProfile = ({navigation}) => {
           type: 'success',
           placement: 'top',
         });
+        setPassword('');
+        setPassword2('');
+        setIsEnabled(false);
       }
     } catch (error) {
       setLoading(false);
