@@ -58,10 +58,6 @@ const SplashScreen = () => {
           AsyncStorage.setItem(STORAGE_TYPE.RefreshToken, refresh_token);
           AsyncStorage.setItem(STORAGE_TYPE.IdToken, id_token);
           AsyncStorage.setItem(STORAGE_TYPE.UserEmail, userDetails.email);
-          AsyncStorage.setItem(
-            STORAGE_TYPE.UserDetails,
-            JSON.stringify(userDetails),
-          );
           try {
             await authService.updateDeviceId(uniqueId, access_token);
           } catch (error) {}
@@ -70,6 +66,7 @@ const SplashScreen = () => {
           await AsyncStorage.clear();
         }
       } catch (error) {
+        console.log(error);
         toast.show(error.message, {
           type: 'danger',
           placement: 'top',

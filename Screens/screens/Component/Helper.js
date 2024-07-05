@@ -523,25 +523,9 @@ export function HeaderComponent({
   const handleLogout = async () => {
     AsyncStorage.clear();
     AsyncStorage.removeItem('LoginToken');
-    navigation.navigate('LoginScreen');
-    // let token = await AsyncStorage.getItem('LoginToken');
-    // console.log(token, '=========fgfffffffffffff----------');
-    // axios
-    //   .post(logout, {
-    //     AccessToken: token,
-    //   })
-    //   .then(function (response) {
-    //     if (response.data.error == false) {
-    //       AsyncStorage.removeItem('LoginToken');
-    //       navigation.navigate('LoginScreen');
-    //     } else {
-    //       console.log('no response', response.data);
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log('ERROR AT LOGOUT API', error);
-    //   });
+    navigation.navigate('SplashScreen');
   };
+
   return (
     <View
       style={{
