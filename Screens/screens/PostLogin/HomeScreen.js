@@ -122,7 +122,7 @@ const HomeScreen = ({navigation}) => {
                 fontWeight: '500',
                 color: '#141F42',
               }}>
-              ID :
+              # :
             </Text>
             <Text
               style={{

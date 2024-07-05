@@ -331,7 +331,7 @@ export function CollectionDetail({
             style={customcss.collectionimage}
           />
           {binId ? (
-            <Text style={customcss.collectiontext}>EvidenceId:</Text>
+            <Text style={customcss.collectiontext}>Evidence Name:</Text>
           ) : (
             <Text style={customcss.collectiontext}>Case:</Text>
           )}

@@ -6,7 +6,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {HeaderComponent} from '../Component/Helper';
 import customcss from '../assets/customcss';
 import {
@@ -29,6 +29,30 @@ const ViewProfile = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const [details, setDetails] = useState(null);
+
+  useEffect(() => {
+    const getUserDetails = async () => {
+      try {
+        const response = await authService.getProfile();
+        if (response.data.error === false) {
+          setDetails(response.data.data);
+        } else {
+          toast.show(response.data.message, {
+            type: 'danger',
+            placement: 'top',
+          });
+        }
+      } catch (error) {
+        toast.show(error.message, {
+          type: 'danger',
+          placement: 'top',
+        });
+      }
+    };
+
+    getUserDetails();
+  }, [toast]);
 
   const changePassword = async () => {
     try {
@@ -175,22 +199,25 @@ const ViewProfile = ({navigation}) => {
         </View>
         <View style={customcss.Editcollectioncont22}>
           <View style={customcss.infocont}>
-            <Text style={customcss.contacttxt}> Contact info </Text>
+            <Text style={customcss.contacttxt}> Contact information </Text>
           </View>
           <View style={customcss.information}>
-            <View style={customcss.informationtxtcont}>
-              <Image
-                source={require('../Component/Image/email.png')}
-                style={customcss.email}
-              />
-              <Text style={customcss.emailtxt}>Dummy@gmail.com</Text>
-            </View>
             <View style={customcss.informationtxtcont}>
               <Image
                 source={require('../Component/Image/mobile.png')}
                 style={customcss.mobile}
               />
-              <Text style={customcss.emailtxt}>+12 123456789 </Text>
+              <Text style={customcss.emailtxt}>
+                {details?.first_name || ''} {details?.last_name || ''}{' '}
+              </Text>
+            </View>
+
+            <View style={customcss.informationtxtcont}>
+              <Image
+                source={require('../Component/Image/email.png')}
+                style={customcss.email}
+              />
+              <Text style={customcss.emailtxt}>{details?.email || ''}</Text>
             </View>
           </View>
         </View>

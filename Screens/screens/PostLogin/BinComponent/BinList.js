@@ -1,4 +1,11 @@
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {GetBinList} from '../../Component/Api';
@@ -50,7 +57,7 @@ const BinList = ({route, navigation}) => {
       <TouchableOpacity
         style={{
           flexDirection: 'row',
-          height: 63,
+          minHeight: 63,
           borderWidth: 1,
           borderRadius: 5,
           marginBottom: 14,
@@ -78,17 +85,13 @@ const BinList = ({route, navigation}) => {
             style={{height: 24, width: 24, resizeMode: 'contain'}}
           />
         </View>
-        <View style={{marginStart: 16}}>
+
+        <View
+          style={{
+            marginStart: 16,
+            width: Dimensions.get('window').width - 150,
+          }}>
           <View style={{flexDirection: 'row'}}>
-            <Text
-              style={{
-                fontSize: 15,
-                fontFamily: Fonts.Inter,
-                fontWeight: '500',
-                color: '#141F42',
-              }}>
-              ID :
-            </Text>
             <Text
               style={{
                 fontSize: 15,
@@ -100,7 +103,16 @@ const BinList = ({route, navigation}) => {
               {item?.bin_name}
             </Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: Fonts.Inter,
+              fontWeight: '700',
+              color: '#727582',
+              textAlign: 'left',
+              width: '100%',
+            }}>
             <Text
               style={{
                 fontSize: 14,
@@ -110,21 +122,10 @@ const BinList = ({route, navigation}) => {
               }}>
               Location :
             </Text>
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: Fonts.Inter,
-                fontWeight: '700',
-                color: '#727582',
-                width: 150,
-                textAlign: 'left',
-              }}
-              numberOfLines={1}>
-              {' '}
-              {item?.location}{' '}
-            </Text>
-          </View>
+            {item?.location}
+          </Text>
         </View>
+
         <View style={{marginLeft: 'auto', marginRight: 25}}>
           <Image
             source={require('../../Component/Image/righticon.png')}

@@ -6,6 +6,7 @@ import {
   ForgotPassword,
   ResetPassword,
   UpdateDevice,
+  GetProfile,
   ResetPasswordLoggedIn,
 } from '../screens/Component/Api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -136,6 +137,19 @@ export class AuthService {
         oldPassword,
         password,
       },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    );
+  }
+
+  async getProfile() {
+    const token = await AsyncStorage.getItem('LoginToken');
+    return axios.post(
+      GetProfile,
+      {},
       {
         headers: {
           Authorization: 'Bearer ' + token,

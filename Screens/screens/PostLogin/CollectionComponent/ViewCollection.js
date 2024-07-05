@@ -70,41 +70,6 @@ const ViewCollection = ({navigation, route}) => {
         />
         <View style={{marginTop: 15}}>
           <CommonBtnWithIcon
-            title={'Edit Case'}
-            source={require('../../Component/Image/edit.png')}
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: 'contain',
-              marginRight: 3,
-            }}
-            width={screenWidth - 40}
-            onPress={() =>
-              navigation.navigate('EditCollection', {
-                id: route?.params?.id,
-                sendData: collectiondetail,
-              })
-            }
-          />
-          {/* <CommonBtnWithIcon
-            title={'View Item'}
-            source={require('../../Component/Image/eye.png')}
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: 'contain',
-              marginRight: 3,
-            }}
-            width={screenWidth - 40}
-            onPress={() =>
-              navigation.navigate('ViewCollectionList', {id: route?.params?.id})
-            }
-            // onPress={() =>
-            //   navigation.navigate('BinList', {id: route?.params?.id})
-            // }
-          /> */}
-
-          <CommonBtnWithIcon
             title={'Warrant List'}
             source={require('../../Component/Image/eye.png')}
             style={{

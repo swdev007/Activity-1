@@ -124,23 +124,6 @@ const ViewCollectionList = ({navigation, route}) => {
         </View> */}
         <View style={{marginTop: 20, marginBottom: 20}}>
           <CommonBtnWithIcon
-            title={'Edit Case'}
-            source={require('../../Component/Image/edit.png')}
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: 'contain',
-              marginRight: 3,
-            }}
-            width={screenWidth - 40}
-            onPress={() =>
-              navigation.navigate('EditCollection', {
-                id: route?.params?.id,
-                sendData: collectiondetail,
-              })
-            }
-          />
-          <CommonBtnWithIcon
             title={'View Warrant'}
             source={require('../../Component/Image/eye.png')}
             style={{

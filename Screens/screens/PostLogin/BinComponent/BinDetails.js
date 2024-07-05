@@ -67,31 +67,13 @@ const BinDetails = ({route, navigation}) => {
       </View>
       <ScrollView style={customcss.viewcollectionmain}>
         <CollectionDetail
-          binId={bindetails?.warrant_id}
+          binId={bindetails?.bin_name}
           binlocation={bindetails?.location}
           bindescription={bindetails?.description}
         />
         <View style={{marginTop: 15}}>
           <CommonBtnWithIcon
-            title={'Edit Warrant'}
-            source={require('../../Component/Image/edit.png')}
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: 'contain',
-              marginRight: 3,
-            }}
-            width={screenWidth - 40}
-            onPress={() =>
-              navigation.navigate('EditBin', {
-                id: route?.params?.id,
-                sendData: bindetails,
-                screenPath: 'Edit Bin',
-              })
-            }
-          />
-          <CommonBtnWithIcon
-            title={'Warrant List'}
+            title={'Back to Warrant List'}
             source={require('../../Component/Image/lock.png')}
             style={{
               height: 15,

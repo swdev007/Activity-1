@@ -20,3 +20,4 @@ export const ForgotPassword = baseurl + 'forgotPassword'; // body => email
 export const ResetPassword = baseurl + 'resetPassword'; // body=> email, password, otp
 export const UpdateDevice = baseurl + 'UpdateDevice'; // body => deviceId
 export const ResetPasswordLoggedIn = baseurl + 'ResetPasswordLoggedIn';
+export const GetProfile = baseurl + 'Profile';
