@@ -52,6 +52,11 @@ export interface ThemeState {
       locationImage: any;
       audio: any;
       audio2: any;
+      info: any;
+      collection: any;
+      profileImage: any;
+      mobile: any;
+      document: any;
     };
     fonts: {
       InterBlack: string;
@@ -84,6 +89,11 @@ let initialState = {
       locationImage: require('../../Assets/Images/location.png'),
       audio: require('../../Assets/Images/audio.png'),
       audio2: require('../../Assets/Images/audio2.png'),
+      info: require('../../Assets/Images/info.png'),
+      collection: require('../../Assets/Images/collection.png'),
+      profileImage: require('../../Assets/Images/profilemg.png'),
+      mobile: require('../../Assets/Images/mobile.png'),
+      document: require('../../Assets/Images/document.png'),
     },
     fonts: {
       InterBlack: 'Inter-Black',

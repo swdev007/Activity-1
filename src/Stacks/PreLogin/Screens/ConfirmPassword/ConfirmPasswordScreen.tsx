@@ -10,11 +10,11 @@ import {useEffect, useState} from 'react';
 import CustomButton from '../../../../Components/Buttons/CommonButton/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useTogglePasswordVisibility} from '../../../../../Screens/screens/PreLogin/useTogglePasswordVisibility';
-import {AuthService} from '../../../../../Screens/services/auth.service';
 import {useToast} from 'react-native-toast-notifications';
 import {ConfirmPasswordScreenStyle} from './ConfirmPassword.style';
 import {useSelector} from 'react-redux';
 import CustomInput from '../../../../Components/CustomInput/CustomInput';
+import {AuthService} from '../../../../Services/Auth/auth.service';
 
 const authService = new AuthService();
 const ConfirmPasswordScreen = ({navigation, route}) => {

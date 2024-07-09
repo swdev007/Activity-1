@@ -1,6 +1,4 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AddUpdate from '../../../Screens/screens/PostLogin/AddUpdate';
-import ViewProfile from '../../../Screens/screens/PostLogin/ViewProfile';
 import BinList from '../../../Screens/screens/PostLogin/BinComponent/BinList';
 import BinDetails from '../../../Screens/screens/PostLogin/BinComponent/BinDetails';
 import AddNewItem from '../../../Screens/screens/PostLogin/BinComponent/AddItem';
@@ -12,6 +10,8 @@ import ViewCollection from './Screens/ViewCollection/ViewCollection';
 import ViewCollectionList from './Screens/ViewCollectionList/ViewCollectionList';
 import AddCollectionList from './Screens/AddCollectionList/AddCollectionList';
 import ViewItem from './Screens/ViewItem/ViewItem';
+import AddUpdate from './Screens/AddUpdate/AddUpdate';
+import ViewProfile from './Screens/Profile/ViewProfile';
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
@@ -27,6 +27,7 @@ export default function HomeStack() {
       <Stack.Screen name="AddCollectionList" component={AddCollectionList} />
       <Stack.Screen name="ViewItem" component={ViewItem} />
       <Stack.Screen name="AddUpdate" component={AddUpdate} />
+      {/*  */}
       <Stack.Screen name="ViewProfile" component={ViewProfile} />
       <Stack.Screen name="BinList" component={BinList} />
       <Stack.Screen name="BinDetails" component={BinDetails} />
