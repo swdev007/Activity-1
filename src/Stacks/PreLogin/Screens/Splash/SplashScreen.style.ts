@@ -1,0 +1,55 @@
+import {StyleSheet, Dimensions} from 'react-native';
+
+export const SplashScreenStyle = (AppTheme: any) =>
+  StyleSheet.create({
+    loaderContainer: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+      backgroundColor: 'trasnsparent',
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+    },
+    splashContainer: {flex: 1},
+    imageBackgroundWrapper: {height: '50%'},
+    imageBackground: {height: '100%', width: '100%'},
+    imageView: {alignItems: 'center'},
+    imageButtonWrapper: {alignItems: 'center', marginTop: -100},
+    splashImage: {height: 200, width: '40%', resizeMode: 'contain'},
+    forgotPassword: {alignItems: 'center', marginBottom: 40},
+    bottom: {marginTop: 'auto', marginBottom: 26, alignItems: 'center'},
+    imageBackgroundCss: {
+      height: 68,
+      width: '50%',
+      resizeMode: 'contain',
+      marginTop: 60,
+    },
+    inventoryText: {
+      color: '#141F42',
+      fontSize: 20,
+      fontWeight: '600',
+      marginTop: 41,
+      fontFamily: AppTheme.fonts.Inter,
+      textAlign: 'center',
+      paddingHorizontal: 20,
+    },
+    forgetText: {
+      fontSize: 16,
+      fontWeight: '600',
+      fontFamily: AppTheme.fonts.Inter,
+      color: '#232529',
+      textTransform: 'capitalize',
+      lineHeight: 22,
+      fontStyle: 'normal',
+      textDecorationLine: 'underline',
+      textDecorationColor: '#000',
+    },
+    nameText: {
+      fontSize: 14,
+      fontWeight: '500',
+      fontStyle: 'normal',
+      fontFamily: AppTheme.fonts.Inter,
+      color: '#232529',
+    },
+  });

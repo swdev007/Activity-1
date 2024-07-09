@@ -1,11 +1,16 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SplashScreen from '../../src/Stacks/Screens/Splash/SplashScreen';
+import SplashScreen from './Screens/Splash/SplashScreen';
+import ForgetPasswordScreen from './Screens/ForgotPassword/ForgetPasswordScreen';
+import ConfirmPasswordScreen from './Screens/ConfirmPassword/ConfirmPasswordScreen';
 
-import ForgetPasswordScreen from '../screens/PreLogin/ForgetPasswordScreen';
-import ConfirmPasswordScreen from '../../src/Stacks/Screens/Splash/SplashScreen';
+export type PreLoginStackParamList = {
+  SplashScreen: undefined;
+  ForgetPasswordScreen: undefined;
+  ConfirmPasswordScreen: undefined;
+};
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<PreLoginStackParamList>();
 
 export default function PreLoginStack() {
   return (
