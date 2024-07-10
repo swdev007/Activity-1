@@ -2,31 +2,39 @@ import {
   View,
   Text,
   TextInput,
+  ScrollView,
   TouchableOpacity,
   PermissionsAndroid,
   Platform,
   Image,
   KeyboardAvoidingView,
+  FlatList,
 } from 'react-native';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
+  AppText,
   CommonBtn,
   CommonBtnWithIcon,
   CustomHeaderNavigation,
   HeaderComponent,
   screenWidth,
-} from '../../../../../Screens/screens/Component/Helper';
+} from '../../../../../../Screens/screens/Component/Helper';
 import Voice from '@react-native-voice/voice';
-import BottomTab from '../../../BottomTab/BottomTab';
+import BottomTab from '../../../../BottomTab/BottomTab';
+import axios from 'axios';
+import {AddItem as AddItemRoute} from '../../../../../Services/Auth/apiRoutes';
 import ImagePicker from 'react-native-image-crop-picker';
-import {UploadSheet} from '../../../../../Screens/screens/Component/UploadSheet';
+import {UploadSheet} from '../../../../../../Screens/screens/Component/UploadSheet';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import VectorIcon from '../../../../../../Screens/screens/Component/vectorIcons';
 import {debounce} from 'lodash';
-import {AddCollectionListStyle} from './AddCollectionList.style';
+import {addItemStyle} from './AddItem.style';
 import {useSelector} from 'react-redux';
-import {StoreInterface} from '../../../../Redux/Store';
+import {StoreInterface} from '../../../../../Redux/Store';
+import CustomInput from '../../../../../Components/CustomInput/CustomInput';
 
-const AddCollectionList = ({route, navigation}) => {
+const AddItem = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isListening2, setIsListening2] = useState(false);
@@ -38,14 +46,16 @@ const AddCollectionList = ({route, navigation}) => {
   const [imageerror, setImageError] = useState('');
   const [nameerror, setNameError] = useState('');
   const [imagepath, setImagePath] = useState('');
+  const [token, settoken] = useState('');
   const [screens, setscreens] = useState([]);
   const picoptionref = useRef<any>();
-  let lastButtonPressRef = useRef(null);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
-  const styles = AddCollectionListStyle(AppTheme);
+  const styles = addItemStyle(AppTheme);
+  let lastButtonPressRef = useRef(null);
   useEffect(() => {
     const routes = navigation.getState()?.routes;
     setscreens(routes);
+    handletoken();
     Voice.onSpeechStart = onSpeechStart;
     Voice.onSpeechEnd = StopListening;
     Voice.onSpeechResults = debounce(onSpeechResults, 1000);
@@ -64,6 +74,12 @@ const AddCollectionList = ({route, navigation}) => {
       Voice.destroy().then(Voice.removeAllListeners);
     };
   }, []);
+
+  const handletoken = async () => {
+    let token = await AsyncStorage.getItem('LoginToken');
+    settoken(token);
+  };
+
   const onSpeechStart = event => {
     console.log('onSpeech Start ==>', event);
   };
@@ -110,6 +126,7 @@ const AddCollectionList = ({route, navigation}) => {
       console.log('Error at StopListening', error);
     }
   };
+  // console.log(imagepath);
   const HandleCamera = grid => {
     if (grid === 1) {
       ImagePicker.openCamera({
@@ -140,82 +157,90 @@ const AddCollectionList = ({route, navigation}) => {
     }
   };
 
-  //   const handleCreateItem = () => {
-  //     var nameValid = false;
-  //     if (nametext.length == 0) {
-  //       setNameError('Name is required');
-  //     } else {
-  //       setNameError('');
-  //       nameValid = true;
-  //     }
-  //     var descriptionValid = false;
-  //     if (descriptiontext.length == 0) {
-  //       setDescriptionError('Description is required');
-  //     } else {
-  //       setDescriptionError('');
-  //       descriptionValid = true;
-  //     }
+  const handleCreateItem = async () => {
+    // var nameValid = false;
+    const pattern = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+    // if (nametext.length == 0) {
+    //   setNameError('Name is required');
+    // } else
+    //  if (pattern.test(nametext) == false) {
+    //   setNameError('Enter proper name');
+    // } else {
+    //   setNameError('');
+    //   nameValid = true;
+    // }
+    var descriptionValid = false;
+    if (descriptiontext.length == 0) {
+      setDescriptionError('Description is required');
+    } else {
+      setDescriptionError('');
+      descriptionValid = true;
+    }
 
-  //     var locationValid = false;
-  //     if (locationtext.length == 0) {
-  //       setLocationError('Location is required');
-  //     } else {
-  //       setLocationError('');
-  //       locationValid = true;
-  //     }
-  //     var imageValid = false;
-  //     if (imagepath.length == 0) {
-  //       setImageError('Image is required');
-  //     } else {
-  //       setImageError('');
-  //       imageValid = true;
-  //     }
-  //     if (nameValid && descriptionValid && locationValid && imageValid) {
-  //       if (imagepath) {
-  //         setLoading(true);
-  //         let photo = {uri: imagepath};
-  //         let formdata = new FormData();
-  //         formdata.append('image_url', {
-  //           uri: photo.uri,
-  //           name: 'image.jpg',
-  //           type: 'image/jpeg',
-  //         });
-  //         formdata.append('binId', route?.params?.id);
-  //         formdata.append('name', nametext);
-  //         formdata.append('description', descriptiontext);
-  //         formdata.append('location', locationtext);
-  //         axios
-  //           .post(AddItem, formdata)
-  //           .then(function (response) {
-  //             if (response?.data?.error == false) {
-  //               navigation.navigate('GetItemListOfBin', {
-  //                 id: route?.params?.id,
-  //                 screenName: 'AddItem',
-  //               });
-  //               setLoading(false);
-  //             }
-  //           })
-  //           .catch(function (error) {
-  //             console.log('errror', error);
-  //             setLoading(false);
-  //           });
-  //       } else {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   };
+    var locationValid = false;
+    if (locationtext.length == 0) {
+      setLocationError('Location is required');
+    } else {
+      setLocationError('');
+      locationValid = true;
+    }
+    var imageValid = false;
+    if (imagepath.length == 0) {
+      setImageError('Image is required');
+    } else {
+      setImageError('');
+      imageValid = true;
+    }
+    if (descriptionValid && locationValid && imageValid) {
+      if (imagepath) {
+        setLoading(true);
+        let photo = {uri: imagepath};
+        let formdata = new FormData();
+        formdata.append('image_url', {
+          uri: photo,
+          name: 'image.jpg',
+          type: 'image/jpeg',
+        });
+        formdata.append('binId', route?.params?.id);
+        formdata.append('name', null);
+        formdata.append('description', descriptiontext);
+        formdata.append('location', locationtext);
+        let token = await AsyncStorage.getItem('LoginToken');
+        formdata.append('AccessToken', token);
+        axios
+          .post(AddItemRoute, formdata, {
+            headers: {Authorization: 'Bearer ' + token},
+          })
+          .then(async function (response) {
+            if (response?.data?.error === false) {
+              await Voice.destroy();
+              Voice.removeAllListeners();
+
+              navigation.goBack();
+              setLoading(false);
+            }
+          })
+          .catch(function (error) {
+            console.log('errror', error);
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleListening = () => {
+    if (!isListening) {
+      if (isListening2) {
+        StopListening();
+      } else {
+        StartListening2();
+      }
+    }
+  };
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
-      <View>
-        <HeaderComponent
-          type={'Icon'}
-          collection={'Add List'}
-          onPress={() => navigation.navigate('Home')}
-          backbtn={'backbtn'}
-          onHandleBack={() => navigation.goBack()}
-        />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
-      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{flex: 1}}>
@@ -226,35 +251,35 @@ const AddCollectionList = ({route, navigation}) => {
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag">
           <View style={styles.editCollectionContainer}>
-            <View style={styles.collectionTextContainerOfAddItem}>
-              <View style={{}}>
-                <View
-                  style={{
-                    justifyContent: 'flex-start',
-                    flexDirection: 'row',
-                  }}>
-                  <Image
-                    source={AppTheme.icons.locationImage}
-                    style={styles.locationImage}
-                  />
-                  <Text style={styles.collectionText}> Name: </Text>
+            {/* <View style={customcss.collectiontextcontofadditem}>
+                <View style={{}}>
+                  <View
+                    style={{
+                      justifyContent: 'flex-start',
+                      flexDirection: 'row',
+                    }}>
+                    <Image
+                      source={require('../../Component/Image/location.png')}
+                      style={customcss.locationimage}
+                    />
+                    <Text style={customcss.collectiontext}> Name: </Text>
+                  </View>
                 </View>
-              </View>
-              <View style={{marginTop: -12}}>
-                <TextInput
-                  textAlignVertical="top"
-                  multiline={true}
-                  style={styles.inputContainer2}
-                  placeholder="Enter Name"
-                  value={nametext}
-                  onChangeText={text => setNameText(text)}
-                  placeholderTextColor={'#727582'}
-                />
-                {nameerror.length > 0 && (
-                  <Text style={styles.error}>{nameerror}</Text>
-                )}
-              </View>
-            </View>
+                <View style={{marginTop: -12}}>
+                  <TextInput
+                    textAlignVertical="top"
+                    multiline={true}
+                    style={customcss.inputcont2}
+                    placeholder="Enter Name"
+                    value={nametext}
+                    onChangeText={text => setNameText(text)}
+                    placeholderTextColor={'#727582'}
+                  />
+                  {nameerror.length > 0 && (
+                    <Text style={customcss.error}>{nameerror}</Text>
+                  )}
+                </View>
+              </View> */}
             <View style={styles.collectionTextContainerOfAddItem2}>
               <View style={{}}>
                 <View
@@ -271,22 +296,14 @@ const AddCollectionList = ({route, navigation}) => {
                 <TouchableOpacity
                   activeOpacity={1}
                   style={styles.audioContainer}
-                  onPress={() => {
-                    if (!isListening) {
-                      if (isListening2) {
-                        StopListening();
-                      } else {
-                        StartListening2();
-                      }
-                    }
-                  }}>
+                  onPress={handleListening}>
                   {isListening2 ? (
                     <Text style={styles.voiceButtonText}>•••</Text>
                   ) : (
                     <>
                       <Image
                         source={AppTheme.icons.audio}
-                        style={styles.audioImage}
+                        style={{height: 14, width: 14}}
                         resizeMode="contain"
                       />
 
@@ -296,19 +313,15 @@ const AddCollectionList = ({route, navigation}) => {
                 </TouchableOpacity>
               </View>
 
-              <View style={styles.inputContainer}>
-                <TextInput
-                  textAlignVertical="top"
-                  multiline={true}
-                  style={styles.inputContainer2}
-                  placeholder="Enter location"
+              <View style={{marginTop: -12}}>
+                <CustomInput
+                  label={''}
                   value={locationtext}
-                  onChangeText={text => setLocationText(text)}
-                  placeholderTextColor={'#727582'}
+                  onChange={setLocationText}
+                  icon={undefined}
+                  error={locationerror}
+                  placeholder={'Enter location'}
                 />
-                {locationerror.length > 0 && (
-                  <Text style={styles.error}>{locationerror}</Text>
-                )}
               </View>
             </View>
             <View style={styles.collectionTextContainerOfAddItem2}>
@@ -322,7 +335,7 @@ const AddCollectionList = ({route, navigation}) => {
                     source={AppTheme.icons.locationImage}
                     style={styles.locationImage}
                   />
-                  <Text style={styles.collectionText}> Description: </Text>
+                  <Text style={styles.collectionText}>Description: </Text>
                 </View>
                 <TouchableOpacity
                   activeOpacity={1}
@@ -335,7 +348,6 @@ const AddCollectionList = ({route, navigation}) => {
                         StartListening();
                       }
                     }
-                    // isListening ? StopListening() : StartListening();
                   }}>
                   {isListening ? (
                     <Text style={styles.voiceButtonText}>•••</Text>
@@ -343,8 +355,7 @@ const AddCollectionList = ({route, navigation}) => {
                     <>
                       <Image
                         source={AppTheme.icons.audio}
-                        style={styles.audioImage}
-                        resizeMode="contain"
+                        style={{height: 14, width: 14, resizeMode: 'contain'}}
                       />
 
                       <Text style={styles.audioText}> Record </Text>
@@ -370,19 +381,31 @@ const AddCollectionList = ({route, navigation}) => {
             <View>
               {imagepath ? (
                 <CommonBtnWithIcon
-                  title={'Take Evidence Photo'}
+                  title={'Take evidence Photo'}
                   source={{uri: imagepath}}
-                  style={styles.customButtonWithIcon}
+                  style={{
+                    height: 20,
+                    width: 20,
+                    resizeMode: 'contain',
+                    borderRadius: 20 / 2,
+                    marginRight: 5,
+                  }}
                   width={screenWidth - 80}
                   onPress={() => HandleCamera(1)}
                 />
               ) : (
-                <View style={styles.commonButtonWithIconContainer}>
+                <View style={{alignItems: 'center', marginBottom: 10}}>
                   <CommonBtnWithIcon
-                    title={'Take Evidence Photo'}
+                    title={'Take evidence Photo'}
                     source={AppTheme.icons.camera}
                     ImageError={'ImageError'}
-                    style={styles.customButtonWithIcon}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      resizeMode: 'contain',
+                      borderRadius: 20 / 2,
+                      marginRight: 5,
+                    }}
                     width={screenWidth - 80}
                     onPress={() => HandleCamera(1)}
                   />
@@ -393,19 +416,21 @@ const AddCollectionList = ({route, navigation}) => {
               )}
             </View>
           </View>
-
           <View>
             <CommonBtn
-              title={'create evidence'}
+              title={'Create Evidence'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
-              //   onPress={() => handleCreateItem()}
+              onPress={() => handleCreateItem()}
               loading={loading}
             />
           </View>
         </KeyboardAwareScrollView>
       </KeyboardAvoidingView>
-      <View style={styles.bottomTabHome}>
+      <View
+        style={{
+          alignSelf: 'flex-end',
+        }}>
         <BottomTab type={'home'} />
       </View>
       <UploadSheet ref={picoptionref} onPress={grid => HandleCamera(grid)} />
@@ -413,4 +438,4 @@ const AddCollectionList = ({route, navigation}) => {
   );
 };
 
-export default AddCollectionList;
+export default AddItem;

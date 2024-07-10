@@ -19,7 +19,7 @@ import {
 } from '../../../../../Screens/screens/Component/Helper';
 
 import Voice from '@react-native-voice/voice';
-import BottomTab from '../../../BottomTab/BottomTab.stack.js';
+import BottomTab from '../../../BottomTab/BottomTab';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../Redux/Store';
 import {AddUpdateStyle} from './AddUpdate.style';
@@ -267,7 +267,7 @@ const AddUpdate = ({navigation, route}) => {
         </View>
       </ScrollView>
       <View style={styles.bottomTabContainer}>
-        <BottomTab type="home" />
+        <BottomTab type="home" typeofid={undefined} />
       </View>
     </View>
   );

@@ -15,7 +15,7 @@ import {
   useTogglePasswordVisibility,
   useTogglePasswordVisibility2,
 } from '../../../../../Screens/screens/PreLogin/useTogglePasswordVisibility';
-import BottomTab from '../../../BottomTab/BottomTab.stack.js';
+import BottomTab from '../../../BottomTab/BottomTab';
 import {AuthService} from '../../../../Services/Auth/auth.service';
 import {useToast} from 'react-native-toast-notifications';
 import {useSelector} from 'react-redux';

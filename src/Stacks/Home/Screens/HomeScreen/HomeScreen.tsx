@@ -71,6 +71,7 @@ const HomeScreen = ({navigation}) => {
         .then(function (response) {
           setUserEmailData(UserEmail);
           setCollectionData(response?.data?.data);
+
           setLoading(false);
         })
         .catch(function (error) {
@@ -87,7 +88,7 @@ const HomeScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.collectionUnitWrapper}
         onPress={() =>
-          navigation.navigate('ViewCollection', {id: item?.collection_id})
+          navigation.navigate('ViewCollection', {id: item?.case_id})
         }>
         <View
           style={styles.lockImageWrapper}
@@ -102,7 +103,7 @@ const HomeScreen = ({navigation}) => {
         <View style={{marginStart: 16}}>
           <View style={styles.dataFields}>
             <Text style={styles.caseInitialText}># :</Text>
-            <Text style={styles.caseNumber}>{item?.external_case_number}</Text>
+            <Text style={styles.caseNumber}>{item?.case_number}</Text>
           </View>
           <View style={styles.dataFields}>
             <Text style={styles.locationInitial}>Location :</Text>
@@ -138,7 +139,7 @@ const HomeScreen = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           data={collectiondata}
           renderItem={(item: any) => RenderCollectionData(item)}
-          keyExtractor={item => item.collection_id}
+          keyExtractor={item => item.case_id}
           contentContainerStyle={styles.collectionListContainer}
         />
       </View>

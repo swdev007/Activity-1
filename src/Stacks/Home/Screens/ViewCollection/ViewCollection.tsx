@@ -1,7 +1,6 @@
 import {View, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
-  CollectionDetail,
   CommonBtnWithIcon,
   CustomHeaderNavigation,
   HeaderComponent,
@@ -15,7 +14,8 @@ import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ViewCollectionStyle} from './ViewCollection.style';
 import {useSelector} from 'react-redux';
-import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
+import {CollectionDetail} from '../../../../Components/Collection/CollectionDetails';
+import {COLLECTION_DETAIL_TYPE} from '../../../../../Screens/enums/collection.enum';
 
 const ViewCollection = ({navigation, route}) => {
   const [collectiondetail, setCollectionDetail] = useState<any>();
@@ -71,8 +71,9 @@ const ViewCollection = ({navigation, route}) => {
         <CollectionDetail
           id={route?.params?.id}
           name={collectiondetail?.name || ''}
+          type={COLLECTION_DETAIL_TYPE.CASE}
         />
-        <View style={styles.bottomWrapper}>
+        <View style={styles.buttonWrapper}>
           <CommonBtnWithIcon
             title={'Warrant List'}
             source={AppTheme.icons.eye}
@@ -92,17 +93,6 @@ const ViewCollection = ({navigation, route}) => {
             width={screenWidth - 40}
             onPress={() => navigation.pop(1)}
           />
-          {/* <CommonBtnWithIcon
-            title={'Print collection Report'}
-            source={require('../../Component/Image/print.png')}
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: 'contain',
-              marginRight: 3,
-            }}
-            width={screenWidth - 40}
-          /> */}
         </View>
       </ScrollView>
       <View style={styles.bottomWrapper}>

@@ -9,6 +9,7 @@ import {
 import BottomTab from '../../../../../Screens/Navigation/BottomTab';
 import {useSelector} from 'react-redux';
 import {ViewCollectionListStyle} from './ViewCollectionList.style';
+import {COLLECTION_DETAIL_TYPE} from '../../../../../Screens/enums/collection.enum';
 const ViewCollectionList = ({navigation, route}) => {
   console.log(route);
   const AppTheme = useSelector((store: any) => store.theme.AppTheme);
@@ -108,7 +109,10 @@ const ViewCollectionList = ({navigation, route}) => {
       />
       <View style={styles.viewCollectionMain}>
         <View>
-          <CollectionDetail id={route?.params?.id} />
+          <CollectionDetail
+            id={route?.params?.id}
+            type={COLLECTION_DETAIL_TYPE.CASE}
+          />
         </View>
         <View style={styles.btnWrapper}>
           <CommonBtnWithIcon

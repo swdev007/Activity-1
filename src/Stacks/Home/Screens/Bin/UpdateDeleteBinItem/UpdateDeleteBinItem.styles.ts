@@ -1,0 +1,108 @@
+import {Dimensions, StyleSheet} from 'react-native';
+export const UpdateDeleteBinItemStyle = StyleSheet.create((AppTheme: any) => {
+  return {
+    root: {flex: 1, backgroundColor: '#fff'},
+    collectionTextContainerOfAddItem2: {
+      marginStart: 18,
+      marginEnd: 18,
+      marginTop: 20,
+      marginBottom: 11,
+      flexDirection: 'row',
+    },
+    locationImage: {
+      height: 18,
+      width: 18,
+      resizeMode: 'contain',
+      alignItems: 'center',
+    },
+    collectionText: {
+      fontSize: 14,
+      fontWeight: '600',
+      fontFamily: AppTheme.fonts.Inter,
+      marginLeft: 4,
+      color: '#141F42',
+      width: 83,
+    },
+    audioContainer: {
+      height: 31,
+      flexDirection: 'row',
+      borderWidth: 1,
+      borderRadius: 5,
+      borderColor: '#fff',
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      padding: 8,
+      marginTop: 6,
+      width: 80,
+    },
+    viewCollectionMain: {
+      flex: 1,
+      backgroundColor: '#fff',
+      marginStart: 20,
+      marginEnd: 20,
+      marginTop: 20,
+      overflow: 'hidden',
+    },
+    editCollectionContainer: {
+      minHeight: 100,
+      borderRadius: 15,
+      backgroundColor: '#F4F4F4',
+      borderWidth: 1,
+      borderColor: '#FFF',
+      marginBottom: 20,
+    },
+    voiceButtonText: {
+      color: '#0F48FF',
+    },
+    audioText: {
+      fontSize: 13,
+      fontFamily: AppTheme.fonts.Inter,
+      fontWeight: '500',
+      color: '#727582',
+      lineHeight: 16,
+    },
+    inputContainer2: {
+      height: 70,
+      borderWidth: 1,
+      borderColor: '#C6C9D7',
+      borderRadius: 5,
+      backgroundColor: '#fff',
+      width: Dimensions.get('window').width / 2,
+      padding: 9,
+      fontSize: 12,
+      color: '#727582',
+    },
+    basicIcon: {
+      height: 14,
+      width: 14,
+    },
+    error: {
+      marginTop: 6,
+      fontSize: 13,
+      fontWeight: '600',
+      color: AppTheme.colors.red,
+      marginStart: 16,
+      fontFamily: AppTheme.fonts.Inter,
+    },
+    commonIconButtonStyle: {
+      height: 20,
+      width: 20,
+      resizeMode: 'contain',
+      borderRadius: 20 / 2,
+      marginRight: 5,
+    },
+    smallButtonContainer: {
+      flexDirection: 'row',
+      marginTop: 'auto',
+      marginBottom: 'auto',
+      justifyContent: 'space-between',
+    },
+    bottomTabContainer: {
+      alignSelf: 'flex-end',
+    },
+    textAndRecordContainer: {
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+    },
+  };
+});

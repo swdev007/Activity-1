@@ -7,10 +7,11 @@ import {
   HeaderComponent,
   screenWidth,
 } from '../../../../../Screens/screens/Component/Helper';
-import BottomTab from '../../../BottomTab/BottomTab.stack.js';
+import BottomTab from '../../../BottomTab/BottomTab';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../Redux/Store';
 import {ViewItemStyle} from './ViewItem.style';
+import {COLLECTION_DETAIL_TYPE} from '../../../../../Screens/enums/collection.enum';
 
 const ViewItem = ({navigation, route}) => {
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
@@ -31,6 +32,7 @@ const ViewItem = ({navigation, route}) => {
             navigation.navigate('AddUpdate', {id: route?.params?.id})
           }
           id={route?.params?.id}
+          type={COLLECTION_DETAIL_TYPE.ITEM}
         />
         <View style={styles.buttonConatiner}>
           <CommonBtnWithIcon

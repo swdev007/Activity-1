@@ -57,6 +57,10 @@ export interface ThemeState {
       profileImage: any;
       mobile: any;
       document: any;
+      placeholder: any;
+      addItem: any;
+      edit: any;
+      help: any;
     };
     fonts: {
       InterBlack: string;
@@ -94,6 +98,10 @@ let initialState = {
       profileImage: require('../../Assets/Images/profilemg.png'),
       mobile: require('../../Assets/Images/mobile.png'),
       document: require('../../Assets/Images/document.png'),
+      placeholder: require('../../Assets/Images/placeholder.png'),
+      addItem: require('../../Assets/Images/additem.png'),
+      edit: require('../../Assets/Images/edit.png'),
+      help: require('../../Assets/Images/help.png'),
     },
     fonts: {
       InterBlack: 'Inter-Black',

@@ -317,6 +317,7 @@ export function CollectionDetail({
       )
       .then(function (response) {
         setCollectionDetail(response.data.data);
+        console.log('details --->', response?.data?.data);
       })
       .catch(function (error) {
         console.log('error of get detail', error);
@@ -345,7 +346,7 @@ export function CollectionDetail({
             <Text style={customcss.collectionId}>#{binId}</Text>
           ) : (
             <Text style={customcss.collectionId}>
-              #{collectiondetail?.external_case_number}
+              {collectiondetail?.case_number}
             </Text>
           )}
         </View>
