@@ -2,21 +2,14 @@ import {
   View,
   Text,
   FlatList,
-  Image,
-  TouchableOpacity,
   BackHandler,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 
 import ImagePicker from 'react-native-image-crop-picker';
-import {UploadSheet} from '../../../../../../Screens/screens/Component/UploadSheet';
-import {
-  CommonBtnWithIcon,
-  CustomHeaderNavigation,
-  HeaderComponent,
-  screenWidth,
-} from '../../../../../../Screens/screens/Component/Helper';
+import {CommonBtnWithIcon} from '../../../../../../Screens/screens/Component/Helper';
 import {GetItemList, updateItem} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
 
@@ -28,6 +21,9 @@ import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import {UploadImageModal} from '../../../../../Components/Modals/UploadImageModal/UploadImageModal';
 import EvidenceListItemCard from '../../../../../Components/Cards/EvidenceListCard/EvidenceListCard';
+import {UploadSheet} from '../../../../../Components/UploadSheet/UploadSheet';
+import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
 export interface ImageUrlByIdType {
   image: string;
   location: string;
@@ -47,6 +43,7 @@ export interface EvidenceType {
   updated_at: string;
   updated_by: string;
   warrant_id: number;
+  warrant_name: string;
 }
 
 const GetItemListOfBin = ({route, navigation}) => {
@@ -64,6 +61,7 @@ const GetItemListOfBin = ({route, navigation}) => {
   const picoptionref = useRef<any>();
   const isfocused = useIsFocused();
   const [screens, setscreens] = useState([]);
+  const screenWidth = Dimensions.get('window').width;
   useEffect(() => {
     const routes = navigation.getState()?.routes;
     setscreens(routes);
@@ -243,14 +241,15 @@ const GetItemListOfBin = ({route, navigation}) => {
   ) : (
     <View style={styles.root}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'Evidence List'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => HandleBackNavigation()}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+
+        <RouteList data={screens} currentname={route.name} />
       </View>
 
       <View style={styles.viewCollectionMain1}>

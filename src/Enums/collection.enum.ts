@@ -1,0 +1,5 @@
+export enum COLLECTION_DETAIL_TYPE {
+  CASE = 'CASE',
+  WARRANT = 'WARRANT',
+  ITEM = 'ITEM',
+}

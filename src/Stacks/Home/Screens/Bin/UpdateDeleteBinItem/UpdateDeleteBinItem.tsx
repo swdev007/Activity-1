@@ -8,27 +8,28 @@ import {
   Image,
   KeyboardAvoidingView,
   Alert,
+  Dimensions,
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 import {
   CommonBtnWithIcon,
   HeaderComponent,
   CommonSmallBtn1,
-  screenWidth,
-  CustomHeaderNavigation,
 } from '../../../../../../Screens/screens/Component/Helper';
 import Voice from '@react-native-voice/voice';
 import BottomTab from '../../../../BottomTab/BottomTab';
 import axios from 'axios';
 import {DeleteItem, updateItem} from '../../../../../Services/Auth/apiRoutes';
 import ImagePicker from 'react-native-image-crop-picker';
-import {UploadSheet} from '../../../../../../Screens/screens/Component/UploadSheet';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {debounce} from 'lodash';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import {UpdateDeleteBinItemStyle} from './UpdateDeleteBinItem.styles';
+import {UploadSheet} from '../../../../../Components/UploadSheet/UploadSheet';
+import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
 
 const UpdateDeleteBinItem = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
@@ -51,6 +52,7 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
   let lastButtonPressRef = useRef(null);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   const styles = UpdateDeleteBinItemStyle(AppTheme);
+  let screenWidth = Dimensions.get('window').width;
   const setUpVoice = async () => {
     if (await Voice.isAvailable()) {
       Voice.onSpeechStart = onSpeechStart;
@@ -280,14 +282,14 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
   return (
     <View style={styles.root}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'Update evidence'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+        <RouteList data={screens} currentname={route.name} />
       </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'height' : 'height'}

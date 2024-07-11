@@ -7,24 +7,24 @@ import {
   Platform,
   Image,
   KeyboardAvoidingView,
+  Dimensions,
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 import {
   CommonBtn,
   CommonBtnWithIcon,
-  CustomHeaderNavigation,
-  HeaderComponent,
-  screenWidth,
 } from '../../../../../Screens/screens/Component/Helper';
 import Voice from '@react-native-voice/voice';
 import BottomTab from '../../../BottomTab/BottomTab';
 import ImagePicker from 'react-native-image-crop-picker';
-import {UploadSheet} from '../../../../../Screens/screens/Component/UploadSheet';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {debounce} from 'lodash';
 import {AddCollectionListStyle} from './AddCollectionList.style';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../Redux/Store';
+import {UploadSheet} from '../../../../Components/UploadSheet/UploadSheet';
+import {RouteList} from '../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
 
 const AddCollectionList = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
@@ -43,6 +43,7 @@ const AddCollectionList = ({route, navigation}) => {
   let lastButtonPressRef = useRef(null);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   const styles = AddCollectionListStyle(AppTheme);
+  const screenWidth = Dimensions.get('window').width;
   useEffect(() => {
     const routes = navigation.getState()?.routes;
     setscreens(routes);
@@ -207,14 +208,15 @@ const AddCollectionList = ({route, navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'Add List'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+
+        <RouteList data={screens} currentname={route.name} />
       </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

@@ -1,12 +1,6 @@
-import {ScrollView, View} from 'react-native';
+import {Dimensions, ScrollView, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {
-  CommonBtnWithIcon,
-  CustomHeaderNavigation,
-  HeaderComponent,
-  Loadingcomponent,
-  screenWidth,
-} from '../../../../../../Screens/screens/Component/Helper';
+import {CommonBtnWithIcon} from '../../../../../../Screens/screens/Component/Helper';
 import {GetBinDetails} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
 import BottomTab from '../../../../BottomTab/BottomTab';
@@ -16,6 +10,9 @@ import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import {BinDetailStyle} from './BinDetails.style';
 import {CollectionDetail} from '../../../../../Components/Collection/CollectionDetails';
+import {LoadingComponent} from '../../../../../Components/Modals/LoadingComponent/LoadingComponent';
+import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
 
 const BinDetails = ({route, navigation}) => {
   // console.log(route);
@@ -25,6 +22,7 @@ const BinDetails = ({route, navigation}) => {
   const [screens, setscreens] = useState([]);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   const styles = BinDetailStyle(AppTheme);
+  let screenWidth = Dimensions.get('window').width;
   useEffect(() => {
     const routes = navigation.getState()?.routes;
     setscreens(routes);
@@ -56,18 +54,19 @@ const BinDetails = ({route, navigation}) => {
   };
 
   return loading ? (
-    <Loadingcomponent />
+    <LoadingComponent />
   ) : (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'View Warrant'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+
+        <RouteList data={screens} currentname={route.name} />
       </View>
       <ScrollView style={styles.viewCollectionMain}>
         <CollectionDetail

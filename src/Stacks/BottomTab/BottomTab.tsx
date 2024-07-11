@@ -1,14 +1,14 @@
 import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
-import {screenWidth} from '../../../Screens/screens/Component/Helper';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../Redux/Store';
 import {BottomTabStyle} from './BottomTab.style';
 
-const BottomTab = ({type}) => {
+const BottomTab = ({type}: {type?: any}) => {
   const navigation: any = useNavigation();
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   const styles = BottomTabStyle(AppTheme);
+  const screenWidth = Dimensions.get('window').width;
   return (
     <View style={styles.root}>
       <View
@@ -21,7 +21,7 @@ const BottomTab = ({type}) => {
           onPress={() => navigation.navigate('ViewProfile')}>
           <View style={styles.profileTabContainer}>
             <Image
-              source={AppTheme.icons.profileImage}
+              source={AppTheme.icons.profile}
               style={styles.profileTab}
               resizeMode="contain"
             />

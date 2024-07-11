@@ -2,49 +2,42 @@ import {
   View,
   Text,
   TextInput,
-  ScrollView,
   TouchableOpacity,
   PermissionsAndroid,
   Platform,
   Image,
   KeyboardAvoidingView,
-  FlatList,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  AppText,
   CommonBtn,
   CommonBtnWithIcon,
-  CustomHeaderNavigation,
-  HeaderComponent,
-  screenWidth,
 } from '../../../../../../Screens/screens/Component/Helper';
 import Voice from '@react-native-voice/voice';
 import BottomTab from '../../../../BottomTab/BottomTab';
 import axios from 'axios';
 import {AddItem as AddItemRoute} from '../../../../../Services/Auth/apiRoutes';
 import ImagePicker from 'react-native-image-crop-picker';
-import {UploadSheet} from '../../../../../../Screens/screens/Component/UploadSheet';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import VectorIcon from '../../../../../../Screens/screens/Component/vectorIcons';
 import {debounce} from 'lodash';
 import {addItemStyle} from './AddItem.style';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import CustomInput from '../../../../../Components/CustomInput/CustomInput';
+import {UploadSheet} from '../../../../../Components/UploadSheet/UploadSheet';
 
 const AddItem = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isListening2, setIsListening2] = useState(false);
-  const [nametext, setNameText] = useState('');
   const [locationtext, setLocationText] = useState('');
   const [descriptiontext, setDescriptionText] = useState('');
   const [descriptionerror, setDescriptionError] = useState('');
   const [locationerror, setLocationError] = useState('');
   const [imageerror, setImageError] = useState('');
-  const [nameerror, setNameError] = useState('');
+  const screenWidth = Dimensions.get('window').width;
   const [imagepath, setImagePath] = useState('');
   const [token, settoken] = useState('');
   const [screens, setscreens] = useState([]);

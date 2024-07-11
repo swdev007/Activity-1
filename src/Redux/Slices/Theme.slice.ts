@@ -55,6 +55,7 @@ export interface ThemeState {
       info: any;
       collection: any;
       profileImage: any;
+      profile: any;
       mobile: any;
       document: any;
       placeholder: any;
@@ -102,6 +103,7 @@ let initialState = {
       addItem: require('../../Assets/Images/additem.png'),
       edit: require('../../Assets/Images/edit.png'),
       help: require('../../Assets/Images/help.png'),
+      profile: require('../../Assets/Images/profile.png'),
     },
     fonts: {
       InterBlack: 'Inter-Black',

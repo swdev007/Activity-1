@@ -7,15 +7,13 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Dimensions,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {
   CommonBtnForViewItem,
   CommonBtnWithIcon,
   CommonSmallBtn1,
-  CustomHeaderNavigation,
-  HeaderComponent,
-  screenWidth,
 } from '../../../../../Screens/screens/Component/Helper';
 
 import Voice from '@react-native-voice/voice';
@@ -23,6 +21,8 @@ import BottomTab from '../../../BottomTab/BottomTab';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../Redux/Store';
 import {AddUpdateStyle} from './AddUpdate.style';
+import {RouteList} from '../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
 
 const AddUpdate = ({navigation, route}) => {
   const [messages, setMessages] = useState([]);
@@ -32,6 +32,7 @@ const AddUpdate = ({navigation, route}) => {
   const [screens, setscreens] = useState([]);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   const styles = AddUpdateStyle(AppTheme);
+  let screenWidth = Dimensions.get('window').width;
   useEffect(() => {
     const routes = navigation.getState()?.routes;
     setscreens(routes);
@@ -98,12 +99,13 @@ const AddUpdate = ({navigation, route}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'Add/Update evidence'}
           onPress={() => navigation.navigate('Home')}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+
+        <RouteList data={screens} currentname={route.name} />
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -267,7 +269,7 @@ const AddUpdate = ({navigation, route}) => {
         </View>
       </ScrollView>
       <View style={styles.bottomTabContainer}>
-        <BottomTab type="home" typeofid={undefined} />
+        <BottomTab type="home" />
       </View>
     </View>
   );

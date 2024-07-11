@@ -11,7 +11,6 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../Redux/Store';
 import {UploadImageModalStyle} from './UploadImageModal.style';
-import VectorIcon from '../../../../Screens/screens/Component/vectorIcons.js';
 export const UploadImageModal = ({
   modalVisible,
   updateModalVisibility,

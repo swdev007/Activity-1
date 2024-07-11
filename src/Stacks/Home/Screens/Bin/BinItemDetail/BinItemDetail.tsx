@@ -1,12 +1,6 @@
-import {ScrollView, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {
-  CommonBtnWithIcon,
-  CustomHeaderNavigation,
-  HeaderComponent,
-  Loadingcomponent,
-  screenWidth,
-} from '../../../../../../Screens/screens/Component/Helper';
+import {Dimensions, ScrollView, View} from 'react-native';
+import {useEffect, useState} from 'react';
+import {CommonBtnWithIcon} from '../../../../../../Screens/screens/Component/Helper';
 import {GetItemDetails} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
 import BottomTab from '../../../../BottomTab/BottomTab';
@@ -15,8 +9,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import {BinItemDetailStyle} from './BinItemDetail.style';
-import {COLLECTION_DETAIL_TYPE} from '../../../../../../Screens/enums/collection.enum';
 import {CollectionDetail} from '../../../../../Components/Collection/CollectionDetails';
+import {COLLECTION_DETAIL_TYPE} from '../../../../../Enums/collection.enum';
+import {LoadingComponent} from '../../../../../Components/Modals/LoadingComponent/LoadingComponent';
+import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
 
 export interface BinDetailsType {
   location: string;
@@ -34,7 +31,7 @@ const BinItemDetail = ({navigation, route}) => {
   const [screens, setscreens] = useState([]);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   let styles = BinItemDetailStyle(AppTheme);
-
+  let screenWidth = Dimensions.get('window').width;
   const GetBinDetailsFunc = async () => {
     setLoading(true);
     let token = await AsyncStorage.getItem('LoginToken');
@@ -85,18 +82,19 @@ const BinItemDetail = ({navigation, route}) => {
   }, [isFocused]);
 
   return loading ? (
-    <Loadingcomponent />
+    <LoadingComponent />
   ) : (
     <View style={styles.root}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'Evidence detail'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+
+        <RouteList data={screens} currentname={route.name} />
       </View>
       <ScrollView style={styles.viewCollectionMain}>
         <CollectionDetail

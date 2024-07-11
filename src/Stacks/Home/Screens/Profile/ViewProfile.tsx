@@ -1,11 +1,4 @@
-import {
-  TextInput,
-  Pressable,
-  Image,
-  Text,
-  View,
-  ScrollView,
-} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   HeaderComponent,
@@ -23,21 +16,29 @@ import {StoreInterface} from '../../../../Redux/Store';
 import {ProfileStyle} from './Profile.style';
 import CustomInput from '../../../../Components/CustomInput/CustomInput';
 import {ProfileDetailsCard} from '../../../../Components/Cards/ProfileDetailCard/ProfileDetailCard';
+import {CommonButton2} from '../../../../Components/Buttons/CommonButton2/CommonButton2';
+import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
 
 const authService = new AuthService();
 const ViewProfile = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const {passwordVisibility, rightIcon, handlePasswordVisibility} =
-    useTogglePasswordVisibility();
-  const {passwordVisibility2, rightIcon2, handlePasswordVisibility2} =
-    useTogglePasswordVisibility2();
   const [isEnabled, setIsEnabled] = useState(false);
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [details, setDetails] = useState(null);
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
   const styles = ProfileStyle(AppTheme);
+  const onChangePassword = (text: string) => {
+    if (!authService.checkIfItIsAValidPassword(text)) {
+      setIsEnabled(false);
+    } else {
+      setIsEnabled(true);
+    }
+    setPassword(text);
+  };
+
+  const onChangeConfirmPassword = (text: string) => setPassword2(text);
 
   useEffect(() => {
     const getUserDetails = async () => {
@@ -134,7 +135,7 @@ const ViewProfile = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Icon'}
           collection={'My profile'}
           onPress={() => navigation.navigate('Home')}
@@ -155,14 +156,7 @@ const ViewProfile = ({navigation}) => {
           <CustomInput
             label={'Current Password'}
             value={password}
-            onChange={(text: string) => {
-              if (!authService.checkIfItIsAValidPassword(text)) {
-                setIsEnabled(false);
-              } else {
-                setIsEnabled(true);
-              }
-              setPassword(text);
-            }}
+            onChange={onChangePassword}
             icon={AppTheme.icons.lock}
             hide={true}
             error={''}
@@ -171,8 +165,8 @@ const ViewProfile = ({navigation}) => {
 
           <CustomInput
             label={'New Password'}
-            value={password}
-            onChange={(text: string) => setPassword2(text)}
+            value={password2}
+            onChange={onChangeConfirmPassword}
             icon={AppTheme.icons.lock}
             hide={true}
             error={''}
@@ -180,11 +174,11 @@ const ViewProfile = ({navigation}) => {
           />
 
           <View style={styles.buttonContainer}>
-            <CommonBtn1
-              title={'Change Password'}
-              onPress={loading ? () => {} : () => changePassword()}
-              color={'#fff'}
+            <CommonButton2
+              onPress={() => changePassword()}
+              title={'Change password'}
               loading={loading}
+              color={'#fff'}
             />
           </View>
         </View>

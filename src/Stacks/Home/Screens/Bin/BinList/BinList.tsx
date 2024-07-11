@@ -6,20 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {GetBinList} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
-import {
-  CustomHeaderNavigation,
-  HeaderComponent,
-  Loadingcomponent,
-} from '../../../../../../Screens/screens/Component/Helper';
 import BottomTab from '../../../../BottomTab/BottomTab';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import {BinListStyle} from './BinList.style';
+import {LoadingComponent} from '../../../../../Components/Modals/LoadingComponent/LoadingComponent';
+import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
+import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
 const BinList = ({route, navigation}) => {
   const [collectiondata, setCollectionData] = useState();
   const [loading, setLoading] = useState(false);
@@ -54,7 +52,7 @@ const BinList = ({route, navigation}) => {
         setLoading(false);
       });
   };
-  const RenderCollectionData = ({item, index}) => {
+  const RenderCollectionData = ({item}) => {
     return (
       <TouchableOpacity
         style={styles.collectionDataItem}
@@ -78,7 +76,7 @@ const BinList = ({route, navigation}) => {
             width: Dimensions.get('window').width - 150,
           }}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.binName}>{item?.bin_name}</Text>
+            <Text style={styles.binName}>{item?.warrant_name}</Text>
           </View>
 
           <Text style={styles.locationContainer}>
@@ -98,18 +96,19 @@ const BinList = ({route, navigation}) => {
     );
   };
   return loading ? (
-    <Loadingcomponent />
+    <LoadingComponent />
   ) : (
     <View style={styles.root}>
       <View>
-        <HeaderComponent
+        <CustomHeader
           type={'Home'}
-          collection={'Warrant List'}
+          collection={'Warrant List dsfmkn'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}
         />
-        <CustomHeaderNavigation data={screens} currentname={route.name} />
+
+        <RouteList data={screens} currentname={route.name} />
       </View>
 
       <View style={styles.collectionListUi}>

@@ -9,10 +9,6 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
-import {
-  HeaderComponent,
-  Loadingcomponent,
-} from '../../../../../Screens/screens/Component/Helper';
 import BottomTab from '../../../../../Screens/Navigation/BottomTab';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -20,6 +16,8 @@ import {GetCollectionList} from '../../../../../Screens/screens/Component/Api';
 import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {HomeScreenStyle} from './HomeScreen.style';
+import {LoadingComponent} from '../../../../Components/Modals/LoadingComponent/LoadingComponent';
+import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
 
 const HomeScreen = ({navigation}) => {
   const [useremail, setUserEmailData] = useState('');
@@ -124,14 +122,10 @@ const HomeScreen = ({navigation}) => {
     );
   };
   return loading ? (
-    <Loadingcomponent />
+    <LoadingComponent />
   ) : (
     <View style={{backgroundColor: '#fff', flex: 1}}>
-      <HeaderComponent
-        type={'Text'}
-        name={useremail}
-        collection={'case list'}
-      />
+      <CustomHeader type={'Text'} name={useremail} collection={'case list'} />
       <View style={styles.collectionListUi}>
         <Text style={styles.caseListHeaderText}>Case List</Text>
         <FlatList
