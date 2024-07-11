@@ -1,6 +1,5 @@
 import {Dimensions, ScrollView, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {CommonBtnWithIcon} from '../../../../../../Screens/screens/Component/Helper';
+import {useEffect, useState} from 'react';
 import {GetBinDetails} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
 import BottomTab from '../../../../BottomTab/BottomTab';
@@ -13,6 +12,7 @@ import {CollectionDetail} from '../../../../../Components/Collection/CollectionD
 import {LoadingComponent} from '../../../../../Components/Modals/LoadingComponent/LoadingComponent';
 import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
 
 const BinDetails = ({route, navigation}) => {
   // console.log(route);
@@ -76,14 +76,15 @@ const BinDetails = ({route, navigation}) => {
         />
 
         <View style={{marginTop: 15}}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Back to Warrant List'}
             source={AppTheme.icons.lock}
             style={styles.commonButtonWithIcon}
             width={screenWidth - 40}
             onPress={() => navigation.pop(1)}
           />
-          <CommonBtnWithIcon
+
+          <CommonButtonWithIcon
             title={'Evidence List'}
             source={AppTheme.icons.eye}
             style={styles.commonButtonWithIcon}
@@ -92,7 +93,8 @@ const BinDetails = ({route, navigation}) => {
               navigation.navigate('GetItemListOfBin', {id: route?.params?.id})
             }
           />
-          <CommonBtnWithIcon
+
+          <CommonButtonWithIcon
             title={'Add Evidence'}
             source={AppTheme.icons.addItem}
             style={[styles.commonButtonWithIcon, {tintColor: '#1F54FD'}]}

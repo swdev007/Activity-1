@@ -2,7 +2,6 @@ import {Dimensions, View} from 'react-native';
 import React from 'react';
 import {
   CollectionDetail,
-  CommonBtnWithIcon,
   CommonSmallBtn1,
 } from '../../../../../Screens/screens/Component/Helper';
 import BottomTab from '../../../BottomTab/BottomTab';
@@ -11,6 +10,7 @@ import {StoreInterface} from '../../../../Redux/Store';
 import {ViewItemStyle} from './ViewItem.style';
 import {COLLECTION_DETAIL_TYPE} from '../../../../Enums/collection.enum';
 import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
 
 const ViewItem = ({navigation, route}) => {
   const AppTheme = useSelector((store: StoreInterface) => store.theme.AppTheme);
@@ -35,19 +35,19 @@ const ViewItem = ({navigation, route}) => {
           type={COLLECTION_DETAIL_TYPE.ITEM}
         />
         <View style={styles.buttonConatiner}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Take Evidence Photo'}
             source={AppTheme.icons.camera}
             style={styles.camerWithIconButtonIcon}
             width={screenWidth - 40}
           />
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Evidence Location'}
             source={AppTheme.icons.locationImage}
             style={styles.camerWithIconButtonIcon}
             width={screenWidth - 40}
           />
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Evidence Description'}
             source={AppTheme.icons.audio2}
             style={styles.camerWithIconButtonIcon}

@@ -12,7 +12,6 @@ import {
 import {useState, useEffect} from 'react';
 import {
   CommonBtnForViewItem,
-  CommonBtnWithIcon,
   CommonSmallBtn1,
 } from '../../../../../Screens/screens/Component/Helper';
 
@@ -23,6 +22,7 @@ import {StoreInterface} from '../../../../Redux/Store';
 import {AddUpdateStyle} from './AddUpdate.style';
 import {RouteList} from '../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
 
 const AddUpdate = ({navigation, route}) => {
   const [messages, setMessages] = useState([]);
@@ -171,7 +171,7 @@ const AddUpdate = ({navigation, route}) => {
               }
             />
           </View>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Take evidence Photo'}
             source={AppTheme.icons.profileImage}
             style={styles.commonBtnWithIcon}

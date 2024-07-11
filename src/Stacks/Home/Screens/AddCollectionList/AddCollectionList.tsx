@@ -10,10 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
-import {
-  CommonBtn,
-  CommonBtnWithIcon,
-} from '../../../../../Screens/screens/Component/Helper';
+
 import Voice from '@react-native-voice/voice';
 import BottomTab from '../../../BottomTab/BottomTab';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -25,6 +22,8 @@ import {StoreInterface} from '../../../../Redux/Store';
 import {UploadSheet} from '../../../../Components/UploadSheet/UploadSheet';
 import {RouteList} from '../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
+import CustomButton from '../../../../Components/Buttons/CommonButton/CustomButton';
 
 const AddCollectionList = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
@@ -371,7 +370,7 @@ const AddCollectionList = ({route, navigation}) => {
             </View>
             <View>
               {imagepath ? (
-                <CommonBtnWithIcon
+                <CommonButtonWithIcon
                   title={'Take Evidence Photo'}
                   source={{uri: imagepath}}
                   style={styles.customButtonWithIcon}
@@ -380,7 +379,7 @@ const AddCollectionList = ({route, navigation}) => {
                 />
               ) : (
                 <View style={styles.commonButtonWithIconContainer}>
-                  <CommonBtnWithIcon
+                  <CommonButtonWithIcon
                     title={'Take Evidence Photo'}
                     source={AppTheme.icons.camera}
                     ImageError={'ImageError'}
@@ -397,12 +396,14 @@ const AddCollectionList = ({route, navigation}) => {
           </View>
 
           <View>
-            <CommonBtn
+            <CustomButton
               title={'create evidence'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}
-              //   onPress={() => handleCreateItem()}
               loading={loading}
+              onPress={() => {
+                // handleCreateItem()
+              }}
             />
           </View>
         </KeyboardAwareScrollView>

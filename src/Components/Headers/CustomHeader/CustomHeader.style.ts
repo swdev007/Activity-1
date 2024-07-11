@@ -68,6 +68,7 @@ export const CustomHeaderStyle = (AppTheme: any) =>
     powerIcon: {
       height: 18,
       width: 18,
+      backgroundColor: '#fff',
     },
     signingOffText: {
       fontSize: 15,

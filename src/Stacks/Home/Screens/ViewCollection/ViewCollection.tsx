@@ -1,9 +1,6 @@
-import {View, ScrollView, SafeAreaView, Dimensions} from 'react-native';
+import {View, ScrollView, Dimensions} from 'react-native';
 import {useEffect, useState} from 'react';
-import {CommonBtnWithIcon} from '../../../../../Screens/screens/Component/Helper';
-import {GetCollectionDetails} from '../../../../../Screens/screens/Component/Api';
 import axios from 'axios';
-import BottomTab from '../../../../../Screens/Navigation/BottomTab';
 import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ViewCollectionStyle} from './ViewCollection.style';
@@ -13,6 +10,9 @@ import {COLLECTION_DETAIL_TYPE} from '../../../../Enums/collection.enum';
 import {LoadingComponent} from '../../../../Components/Modals/LoadingComponent/LoadingComponent';
 import {RouteList} from '../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
+import {GetCollectionDetails} from '../../../../Services/Auth/apiRoutes';
+import BottomTab from '../../../BottomTab/BottomTab';
 
 const ViewCollection = ({navigation, route}) => {
   const [collectiondetail, setCollectionDetail] = useState<any>();
@@ -72,7 +72,7 @@ const ViewCollection = ({navigation, route}) => {
           type={COLLECTION_DETAIL_TYPE.CASE}
         />
         <View style={styles.buttonWrapper}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Warrant List'}
             source={AppTheme.icons.eye}
             style={styles.eyeIcon}
@@ -84,7 +84,8 @@ const ViewCollection = ({navigation, route}) => {
               })
             }
           />
-          <CommonBtnWithIcon
+
+          <CommonButtonWithIcon
             title={'Back to Case'}
             source={AppTheme.icons.lock}
             style={styles.lockIcon}

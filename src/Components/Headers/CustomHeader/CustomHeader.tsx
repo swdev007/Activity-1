@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import VectorIcon from '../../../../Screens/screens/Component/vectorIcons';
+
 import {
   Platform,
   TouchableOpacity,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {CustomHeaderStyle} from './CustomHeader.style';
 import {useSelector} from 'react-redux';
+import VectorIcon from '../../Icons/VectorIcons/VectorIcons';
 export const STATUSBAR_DEFAULT_HEIGHT = 20;
 
 export function getStatusBarHeight(skipAndroid = false) {

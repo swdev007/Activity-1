@@ -1,13 +1,11 @@
 import {Dimensions, View} from 'react-native';
-import {
-  CollectionDetail,
-  CommonBtnWithIcon,
-} from '../../../../../Screens/screens/Component/Helper';
-import BottomTab from '../../../../../Screens/Navigation/BottomTab';
 import {useSelector} from 'react-redux';
 import {ViewCollectionListStyle} from './ViewCollectionList.style';
 import {COLLECTION_DETAIL_TYPE} from '../../../../Enums/collection.enum';
 import {CustomHeader} from '../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
+import {CollectionDetail} from '../../../../Components/Collection/CollectionDetails';
+import BottomTab from '../../../BottomTab/BottomTab';
 const ViewCollectionList = ({navigation, route}) => {
   const screenWidth = Dimensions.get('window').width;
   const AppTheme = useSelector((store: any) => store.theme.AppTheme);
@@ -30,7 +28,7 @@ const ViewCollectionList = ({navigation, route}) => {
           />
         </View>
         <View style={styles.btnWrapper}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'View Warrant'}
             source={AppTheme.icons.eye}
             style={styles.viewWarrantButton}

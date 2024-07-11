@@ -1,4 +1,4 @@
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import AppText from '../../Text/AppText/AppText';
 import {CommonButtonStyle} from './CommonButtonWithIcon.style';
@@ -11,12 +11,12 @@ const CommonButtonWithIcon = ({
   source,
   style,
 }: {
-  onPress: any;
-  ImageError: string;
-  title: string;
-  width: number;
-  source: string;
-  style: any;
+  onPress?: any;
+  ImageError?: string;
+  title?: string;
+  width?: number;
+  source?: string | {uri: string};
+  style?: any;
 }) => {
   const AppTheme = useSelector((store: any) => store.theme.AppTheme);
   const styles = CommonButtonStyle(AppTheme);

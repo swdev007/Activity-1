@@ -9,11 +9,8 @@ import {
   KeyboardAvoidingView,
   Dimensions,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  CommonBtn,
-  CommonBtnWithIcon,
-} from '../../../../../../Screens/screens/Component/Helper';
+import {useEffect, useRef, useState} from 'react';
+
 import Voice from '@react-native-voice/voice';
 import BottomTab from '../../../../BottomTab/BottomTab';
 import axios from 'axios';
@@ -27,6 +24,8 @@ import {useSelector} from 'react-redux';
 import {StoreInterface} from '../../../../../Redux/Store';
 import CustomInput from '../../../../../Components/CustomInput/CustomInput';
 import {UploadSheet} from '../../../../../Components/UploadSheet/UploadSheet';
+import CommonButtonWithIcon from '../../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
+import CustomButton from '../../../../../Components/Buttons/CommonButton/CustomButton';
 
 const AddItem = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
@@ -244,35 +243,6 @@ const AddItem = ({route, navigation}) => {
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag">
           <View style={styles.editCollectionContainer}>
-            {/* <View style={customcss.collectiontextcontofadditem}>
-                <View style={{}}>
-                  <View
-                    style={{
-                      justifyContent: 'flex-start',
-                      flexDirection: 'row',
-                    }}>
-                    <Image
-                      source={require('../../Component/Image/location.png')}
-                      style={customcss.locationimage}
-                    />
-                    <Text style={customcss.collectiontext}> Name: </Text>
-                  </View>
-                </View>
-                <View style={{marginTop: -12}}>
-                  <TextInput
-                    textAlignVertical="top"
-                    multiline={true}
-                    style={customcss.inputcont2}
-                    placeholder="Enter Name"
-                    value={nametext}
-                    onChangeText={text => setNameText(text)}
-                    placeholderTextColor={'#727582'}
-                  />
-                  {nameerror.length > 0 && (
-                    <Text style={customcss.error}>{nameerror}</Text>
-                  )}
-                </View>
-              </View> */}
             <View style={styles.collectionTextContainerOfAddItem2}>
               <View style={{}}>
                 <View
@@ -373,7 +343,7 @@ const AddItem = ({route, navigation}) => {
             </View>
             <View>
               {imagepath ? (
-                <CommonBtnWithIcon
+                <CommonButtonWithIcon
                   title={'Take evidence Photo'}
                   source={{uri: imagepath}}
                   style={{
@@ -388,7 +358,7 @@ const AddItem = ({route, navigation}) => {
                 />
               ) : (
                 <View style={{alignItems: 'center', marginBottom: 10}}>
-                  <CommonBtnWithIcon
+                  <CommonButtonWithIcon
                     title={'Take evidence Photo'}
                     source={AppTheme.icons.camera}
                     ImageError={'ImageError'}
@@ -410,7 +380,7 @@ const AddItem = ({route, navigation}) => {
             </View>
           </View>
           <View>
-            <CommonBtn
+            <CustomButton
               title={'Create Evidence'}
               backgroundColor={'#1F54FD'}
               color={'#fff'}

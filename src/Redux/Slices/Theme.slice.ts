@@ -104,6 +104,7 @@ let initialState = {
       edit: require('../../Assets/Images/edit.png'),
       help: require('../../Assets/Images/help.png'),
       profile: require('../../Assets/Images/profile.png'),
+      power: require('../../Assets/Images/power.png'),
     },
     fonts: {
       InterBlack: 'Inter-Black',

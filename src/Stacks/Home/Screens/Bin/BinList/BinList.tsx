@@ -102,7 +102,7 @@ const BinList = ({route, navigation}) => {
       <View>
         <CustomHeader
           type={'Home'}
-          collection={'Warrant List dsfmkn'}
+          collection={'Warrant List'}
           onPress={() => navigation.navigate('Home')}
           backbtn={'backbtn'}
           onHandleBack={() => navigation.goBack()}

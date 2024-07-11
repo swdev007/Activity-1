@@ -9,7 +9,6 @@ import {
 import {useEffect, useRef, useState} from 'react';
 
 import ImagePicker from 'react-native-image-crop-picker';
-import {CommonBtnWithIcon} from '../../../../../../Screens/screens/Component/Helper';
 import {GetItemList, updateItem} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
 
@@ -24,6 +23,7 @@ import EvidenceListItemCard from '../../../../../Components/Cards/EvidenceListCa
 import {UploadSheet} from '../../../../../Components/UploadSheet/UploadSheet';
 import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
 export interface ImageUrlByIdType {
   image: string;
   location: string;
@@ -150,7 +150,7 @@ const GetItemListOfBin = ({route, navigation}) => {
           <Text style={styles.noItemText}> No Evidence Data </Text>
         </View>
         <View style={styles.noItemSectionButtonWrapper}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Add Evidence'}
             onPress={() =>
               navigation.navigate('AddNewItem', {id: route?.params?.id})
@@ -254,7 +254,7 @@ const GetItemListOfBin = ({route, navigation}) => {
 
       <View style={styles.viewCollectionMain1}>
         <View style={styles.evidenceListContainer}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Add Evidence'}
             onPress={() =>
               navigation.navigate('AddNewItem', {id: route?.params?.id})

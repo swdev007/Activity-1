@@ -1,6 +1,5 @@
 import {Dimensions, ScrollView, View} from 'react-native';
 import {useEffect, useState} from 'react';
-import {CommonBtnWithIcon} from '../../../../../../Screens/screens/Component/Helper';
 import {GetItemDetails} from '../../../../../Services/Auth/apiRoutes';
 import axios from 'axios';
 import BottomTab from '../../../../BottomTab/BottomTab';
@@ -14,6 +13,7 @@ import {COLLECTION_DETAIL_TYPE} from '../../../../../Enums/collection.enum';
 import {LoadingComponent} from '../../../../../Components/Modals/LoadingComponent/LoadingComponent';
 import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
 
 export interface BinDetailsType {
   location: string;
@@ -107,7 +107,7 @@ const BinItemDetail = ({navigation, route}) => {
           type={COLLECTION_DETAIL_TYPE.ITEM}
         />
         <View style={{marginTop: 15}}>
-          <CommonBtnWithIcon
+          <CommonButtonWithIcon
             title={'Edit Evidence'}
             source={AppTheme.icons.edit}
             style={{
@@ -121,7 +121,8 @@ const BinItemDetail = ({navigation, route}) => {
               editEvidence();
             }}
           />
-          <CommonBtnWithIcon
+
+          <CommonButtonWithIcon
             title={'Back to Warrant'}
             source={AppTheme.icons.eye}
             style={styles.eyeIcon}

@@ -11,11 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
-import {
-  CommonBtnWithIcon,
-  HeaderComponent,
-  CommonSmallBtn1,
-} from '../../../../../../Screens/screens/Component/Helper';
+import {CommonSmallBtn1} from '../../../../../../Screens/screens/Component/Helper';
 import Voice from '@react-native-voice/voice';
 import BottomTab from '../../../../BottomTab/BottomTab';
 import axios from 'axios';
@@ -30,6 +26,7 @@ import {UpdateDeleteBinItemStyle} from './UpdateDeleteBinItem.styles';
 import {UploadSheet} from '../../../../../Components/UploadSheet/UploadSheet';
 import {RouteList} from '../../../../../Components/Headers/RouteList/RouteList';
 import {CustomHeader} from '../../../../../Components/Headers/CustomHeader/CustomHeader';
+import CommonButtonWithIcon from '../../../../../Components/Buttons/CommonButtonWithIcon/CommonButtonWithIcon';
 
 const UpdateDeleteBinItem = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
@@ -323,15 +320,15 @@ const UpdateDeleteBinItem = ({route, navigation}) => {
             />
             <View>
               {imagepath ? (
-                <CommonBtnWithIcon
-                  title={'Take evidence Photo'}
+                <CommonButtonWithIcon
+                  title={'Take evidence Photo djk'}
                   source={{uri: imagepath}}
                   style={styles.commonIconButtonStyle}
                   width={screenWidth - 80}
                   onPress={() => HandleCamera(1)}
                 />
               ) : (
-                <CommonBtnWithIcon
+                <CommonButtonWithIcon
                   title={'Take Evidence Photo'}
                   source={AppTheme.icons.camera}
                   style={styles.commonIconButtonStyle}
